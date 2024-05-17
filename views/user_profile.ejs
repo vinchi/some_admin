@@ -1,0 +1,643 @@
+<%- include('partials/header'); %>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Navbar -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="검색어를 입력해주세요">
+                    <button class="search-btn" type="submit"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="theme-toggle" hidden>
+            <label for="theme-toggle" class="theme-toggle"></label>
+            <a href="#" class="notif">
+                <i class='bx bx-bell'></i>
+                <span class="count">12</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="./imges/logo_some_50_56.png">
+            </a>
+        </nav>
+
+        <!-- End of Navbar -->
+
+        <div class="main">
+            <div class="user-profile-management">
+                <!-- 기본정보 left -->
+                <div class="profile-list-left">
+                    <div class="title-top">
+                        <h4>유저계정</h4>
+                    </div>
+                    <div class="content-wrap">
+                        <div class="item-wrap">
+                            <div class="img-item">
+                                
+                                <% if(user.photoUrl[0]) { %>
+                                    <img src="<%= user.photoUrl[0] %>" class="user-img">
+                                    
+                                <% } else { %>
+                                    <img src="./imges/avatar/Avatar=13.png" class="user-img">
+                                <% } %>
+                                <div class="fly-circle"></div>
+                            </div>
+    
+                            <div class="title-wrap">
+                                <div class="title"><%= user.username %></div>
+                                <div class="email"><%= user.email %></div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-wrap">
+                            <div class="user-id-item">
+                                <div class="user-item">
+                                    <div class="title">승인여부</div>
+                                    <div class="user-content">
+                                        <input type="text" placeholder="승인보류중(보류이유)"></input>
+                                        <button class="btn-plus">변경</button>
+                                    </div>
+                                </div>
+                                <div class="user-item">
+                                    <div class="title">보석개수</div>
+                                    <div class="user-content">
+                                        <input type="text" placeholder="3000개" value="<%= user.dia %>"></input>
+                                        <button class="btn-plus">추가</button>
+                                    </div>
+                                </div>
+                                <div class="user-item">
+                                    <div class="item">
+                                        <div class="title">신고받은건수</div>
+                                        <div class="user-content">
+                                            <span class="text1">0건 중</span>
+                                            <span class="text2">0건 처리완료</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <!-- user-info-right  -->
+                <div class="profile-list-right">
+
+                    <div class="title-top">
+                        <h4>기본정보</h4>
+                    </div>
+
+                    <div class="user-id-item">
+
+                        <div class="user-item">
+                            <div class="title">유저네임</div>
+                            <div class="user-content">
+                                <input type="text" placeholder="국화꽃 향기" value="<%= user.username %>"></input>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">휴대폰</div>
+                            <div class="user-content">
+                                <input type="text" placeholder="010-000-0000" value="<%= user.phone %>"></input>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">유저 ID</div>
+                            <div class="user-content">
+                                <input type="text" placeholder="sdosdijsdijfoijsdff" value="<%= user.uid %>"></input>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">이메일</div>
+                            <div class="user-content">
+                                <input type="text" placeholder="SOMEPOONING@gmail.com" value="<%= user.email %>"></input>
+                            </div>
+                        </div>
+
+                        <div class="user-item photo-item">
+                            <div class="title flex">
+                                <span>사진</span>
+                                <span>(최대5장등록)</span>
+                            </div>
+                            <div class="user-content">
+
+                                <div class="photo-wrap">
+                                    <% if(user.photoUrl.length > 0) { 
+                                        user.photoUrl.forEach(photo => { %>
+                                            <div class="user-photos">
+                                                <img src="<%= photo %>" width="30" height="200">
+                                            </div>
+                                    <% })
+                                    } else { %>
+                                        <div class="user-photos" style="width:30;height:30">
+                                            <img src="./imges/avatar/Avatar=12.png">
+                                        </div>
+                                        <div class="user-photos">
+                                            <img src="./imges/avatar/Avatar=15.png">
+                                        </div>
+                                        <div class="user-photos">
+                                            <img src="./imges/avatar/Avatar=17.png">
+                                        </div>
+                                        <div class="user-photos">
+                                            <img src="./imges/avatar/Avatar=14.png">
+                                        </div>
+                                        <div class="user-photos noimg">
+                                            <img src="./imges/icon/icon-noimg.png">
+                                        </div>
+                                    <% } %>
+                                </div>
+
+
+                                <div class="select-menu" id="select-photo">
+                                    <div class="select-btn" id="select-btn-photo">
+                                        <span class="sBtn-text" id="sBtn-text-photo">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-photo">
+                                        <li class="option" id="option-photo">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-photo">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-photo">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-photo">보류</span>
+                                        </li>
+                                        <li class="option" id="option-photo">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-photo">반려</span>
+                                        </li>
+                                        <li class="option" id="option-photo">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-photo">인증완료</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">음성</div>
+                            <div class="user-content audio-item">
+                                <div class="audio-wrap">
+                                    <% if(user.voiceUrl) { %>
+                                        <audio controls disableRemotePlayback src="<%= user.voiceUrl %>"></audio>
+                                    <% } else  { %>
+                                        <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
+                                    <% } %>
+                                </div>
+
+                                <div class="select-menu" id="select-audio">
+                                    <div class="select-btn" id="select-btn-audio">
+                                        <span class="sBtn-text" id="sBtn-text-audio">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-audio">
+
+                                        <li class="option" id="option-audio">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-audio">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-audio">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-audio">보류</span>
+                                        </li>
+                                        <li class="option" id="option-audio">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-audio">인증완료</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+
+                        <div class="user-item">
+                            <div class="title">영상</div>
+                            <div class="user-content video-item">
+                                <div class="v-wrap">
+                                    <video width="60%" height="300px" controls>
+                                        <% if(user.videoUrl) { %>
+                                            <source src="<%= user.videoUrl %>" type="video/mp4">
+                                        <% } else { %>
+                                            <source src="./imges/video/IMG_3165.MOV" type="video/mp4">
+                                        <% } %>
+                                    </video>
+                                </div>
+
+                                <div class="select-menu" id="select-video">
+                                    <div class="select-btn" id="select-btn-video">
+                                        <span class="sBtn-text" id="sBtn-text-video">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-video">
+
+                                        <li class="option" id="option-video">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-video">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-video">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-video">보류</span>
+                                        </li>
+                                        <li class="option" id="option-video">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-video">인증완료</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">자기소개</div>
+                            <div class="user-content">
+                                <textarea type="text"><%= user.introduce %></textarea>
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">국적</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-01">
+                                    <div class="select-btn" id="select-btn-01">
+                                        <span class="sBtn-text" id="sBtn-text-01">대한민국</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options">
+                                        <li class="option" id="option-01">
+                                            <!-- <i class="bx bxl-github" style="color: #171515;"></i> -->
+                                            <span class="option-text" id="option-text-01">Github</span>
+                                        </li>
+                                        <li class="option" id="option-01">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-01">Instagram</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">지역</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-02">
+                                    <div class="select-btn" id="select-btn-02">
+                                        <span class="sBtn-text" id="sBtn-text-02">서울</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-02">
+                                        <li class="option" id="option-02">
+                                            <!-- <i class="bx bxl-github" style="color: #171515;"></i> -->
+                                            <span class="option-text" id="option-text-02">충청도</span>
+                                        </li>
+                                        <li class="option" id="option-02">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-02">전라도</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">학력</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-03">
+                                    <div class="select-btn" id="select-btn-03">
+                                        <span class="sBtn-text" id="sBtn-text-03">대학교</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-03">
+                                        <li class="option" id="option-03">
+                                            <!-- <i class="bx bxl-github" style="color: #171515;"></i> -->
+                                            <span class="option-text" id="option-text-03">고등학교</span>
+                                        </li>
+                                        <li class="option" id="option-03">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-03">전문대학교</span>
+                                        </li>
+
+                                        <li class="option" id="option-03">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-03">대학원</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">직업</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04">
+                                    <div class="select-btn" id="select-btn-04">
+                                        <span class="sBtn-text" id="sBtn-text-04">학생</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-04">
+
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">아르바이트</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">프리랜서</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">회사원</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">자영업</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">전문직</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">의료직</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">금융직</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">교육직</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">연구직</span>
+                                        </li>
+                                        <li class="option" id="option-04">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-04">기타</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">명문대인증</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-03-1">
+                                    <div class="select-btn" id="select-btn-03-1">
+                                        <span class="sBtn-text" id="sBtn-text-03-1">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-03-1">
+                                        <li class="option" id="option-03-1">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-03-1">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-03-1">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-03-1">보류</span>
+                                        </li>
+                                        <li class="option" id="option-03-1">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-03-1">인증완료</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">전문직인증</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-05">
+                                    <div class="select-btn" id="select-btn-05">
+                                        <span class="sBtn-text" id="sBtn-text-05">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-05">
+
+                                        <li class="option" id="option-05">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-05">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-05">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-05">보류</span>
+                                        </li>
+                                        <li class="option" id="option-05">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-05">인증완료</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">대기업인증</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-06">
+                                    <div class="select-btn" id="select-btn-06">
+                                        <span class="sBtn-text" id="sBtn-text-06">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-06">
+
+                                        <li class="option" id="option-06">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-06">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-06">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-06">보류</span>
+                                        </li>
+                                        <li class="option" id="option-06">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-06">인증완료</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">사업가인증</div>
+                            <div class="user-content">
+
+                                <div class="select-menu" id="select-07">
+                                    <div class="select-btn" id="select-btn-07">
+                                        <span class="sBtn-text" id="sBtn-text-07">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-07">
+
+                                        <li class="option" id="option-07">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-07">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-07">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-07">보류</span>
+                                        </li>
+                                        <li class="option" id="option-07">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-07">연매출 10억 이상 인증완료</span>
+                                        </li>
+                                        <li class="option" id="option-07">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-07">연매출 20억 이상 인증완료</span>
+                                        </li>
+                                        <li class="option" id="option-07">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-07">연매출 30억 이상 인증완료</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">소득인증</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-08">
+                                    <div class="select-btn" id="select-btn-08">
+                                        <span class="sBtn-text" id="sBtn-text-08">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-08">
+
+                                        <li class="option" id="option-08">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-08">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-08">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-08">보류</span>
+                                        </li>
+                                        <li class="option" id="option-08">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-08">고소득 인증완료</span>
+                                        </li>
+                                        <li class="option" id="option-08">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-08">억대소득 인증완료</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="title">자산인증</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-09">
+                                    <div class="select-btn" id="select-btn-09">
+                                        <span class="sBtn-text" id="sBtn-text-09">미심사</span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="options-09">
+
+                                        <li class="option" id="option-09">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-09">심사중</span>
+                                        </li>
+                                        <li class="option" id="option-09">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-09">보류</span>
+                                        </li>
+                                        <li class="option" id="option-09">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-09">고액자산 5억원 이상 인증완료</span>
+                                        </li>
+                                        <li class="option" id="option-09">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-09">고액자산 10억원 이상 인증완료</span>
+                                        </li>
+                                        <li class="option" id="option-09">
+                                            <!-- <i class="bx bxl-instagram-alt" style="color: #E1306C;"></i> -->
+                                            <span class="option-text" id="option-text-09">고액자산 20억원 이상 인증완료</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- 첨부서류 -->
+                        <div class="attached-file-wrap">
+                            <div class="top-title">인증서류 첨부파일</div>
+
+                            <!--image popup-->
+                            <!-- Trigger the Modal -->
+                            <div class="att-file">
+                                <div class="images">
+                                    <div class="att-title">명문대</div>
+                                    <img src="./imges/acc/jolup-file.png" alt="명문대인증 첨부파일">
+                                </div>
+                                <div class="images">
+                                    <div class="att-title">전문직</div>
+                                    <img src="./imges/acc/attachedfile2.png" alt="전문직인증 첨부파일">
+                                </div>
+                                <div class="images">
+                                    <div class="att-title">대기업</div>
+                                    <img id="myImg" src="./imges/acc/jolup-file.png" alt="대기업인증 첨부파일">
+                                </div>
+                                <div class="images">
+                                    <div class="att-title">사업가</div>
+                                    <img id="myImg" src="./imges/acc/jolup-file.png" alt="사업가인증 첨부파일">
+                                </div>
+                                <div class="images">
+                                    <div class="att-title">소득</div>
+                                    <img id="myImg" src="./imges/acc/attachedfile2.png" alt="소득인증 첨부파일">
+                                </div>
+                                <div class="images">
+                                    <div class="att-title">자산</div>
+                                    <img id="myImg" src="./imges/acc/attachedfile2.png" alt="자산인증 첨부파일">
+                                </div>
+
+                            </div>
+
+                            <div class="modal">
+                                <span class="close2"><i class="fas fa-times"></i></span>
+                                <div class="modalContent">
+                                    <img src="" class="modalImg" />
+                                    <span class="modalTxt"></span>
+                                </div>
+                            </div>
+
+                            <!--End image popup-->
+                        </div>
+
+                        <!-- 버튼 -->
+                        <div class="profile-btn">
+                            <button class="btn-ing">보류중 (알림보내기)</button>
+                            <button class="btn-return">반려 (알림보내기)</button>
+                            <button class="btn-ok">승인 (알림보내기)</button>
+                            <button class="btn-save">프로필수정</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+<script src="js/modal.js"></script>
+<script src="js/dropdown_user_pro.js"></script>
+<%- include('partials/footer'); %>
