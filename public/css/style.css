@@ -3842,13 +3842,13 @@ button.btn-plus{
     # select menu 1 
 \*-----------------------------------*/
 
-.select-menu{
+.select-menu {
     position: relative;
     width: 100%;
     margin: 8px 0px;
 }
 
-.select-menu .select-btn{
+.select-menu .select-btn {
     display: flex;
     background: #fbfbfb;
     padding: 12px;
@@ -3861,7 +3861,7 @@ button.btn-plus{
     border: 1px solid rgb(83, 44, 144, 0.1);
 }
 
-.select-menu .select-btn:focus-within{
+.select-menu .select-btn:focus-within {
     background-color: #fff;
     box-shadow: 0px 0px 4px rgb(83, 44, 144, 0.6);
     border: 1px solid var(--primary);

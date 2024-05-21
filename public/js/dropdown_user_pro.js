@@ -1,55 +1,55 @@
 
 
 // drop down menu - 프로필사진
-const optionMenu_photo = document.querySelector("#select-photo"),
-    selectBtn_photo = optionMenu_photo.querySelector("#select-btn-photo"),
-    options_photo = optionMenu_photo.querySelectorAll("#option-photo"),
-    sBtn_text_photo = optionMenu_photo.querySelector("#sBtn-text-photo");
+// const optionMenu_photo = document.querySelector("#select-photo"),
+//     selectBtn_photo = optionMenu_photo.querySelector("#select-btn-photo"),
+//     options_photo = optionMenu_photo.querySelectorAll("#option-photo"),
+//     sBtn_text_photo = optionMenu_photo.querySelector("#sBtn-text-photo");
 
-selectBtn_photo.addEventListener("click", () => optionMenu_photo.classList.toggle("active"));
+// selectBtn_photo.addEventListener("click", () => optionMenu_photo.classList.toggle("active"));
 
-options_photo.forEach(option_photo => {
-    option_photo.addEventListener("click", () => {
-        let selectedOption_photo = option_photo.querySelector("#option-text-photo").innerText;
-        sBtn_text_photo.innerText = selectedOption_photo;
+// options_photo.forEach(option_photo => {
+//     option_photo.addEventListener("click", () => {
+//         let selectedOption_photo = option_photo.querySelector("#option-text-photo").innerText;
+//         sBtn_text_photo.innerText = selectedOption_photo;
 
-        optionMenu_photo.classList.remove("active");
-    });
-});
+//         optionMenu_photo.classList.remove("active");
+//     });
+// });
 
 // drop down menu - 음성
-const optionMenu_audio = document.querySelector("#select-audio"),
-    selectBtn_audio = optionMenu_audio.querySelector("#select-btn-audio"),
-    options_audio = optionMenu_audio.querySelectorAll("#option-audio"),
-    sBtn_text_audio = optionMenu_audio.querySelector("#sBtn-text-audio");
+// const optionMenu_audio = document.querySelector("#select-audio"),
+//     selectBtn_audio = optionMenu_audio.querySelector("#select-btn-audio"),
+//     options_audio = optionMenu_audio.querySelectorAll("#option-audio"),
+//     sBtn_text_audio = optionMenu_audio.querySelector("#sBtn-text-audio");
 
-selectBtn_audio.addEventListener("click", () => optionMenu_audio.classList.toggle("active"));
+// selectBtn_audio.addEventListener("click", () => optionMenu_audio.classList.toggle("active"));
 
-options_audio.forEach(option_audio => {
-    option_audio.addEventListener("click", () => {
-        let selectedOption_audio = option_audio.querySelector("#option-text-audio").innerText;
-        sBtn_text_audio.innerText = selectedOption_audio;
+// options_audio.forEach(option_audio => {
+//     option_audio.addEventListener("click", () => {
+//         let selectedOption_audio = option_audio.querySelector("#option-text-audio").innerText;
+//         sBtn_text_audio.innerText = selectedOption_audio;
 
-        optionMenu_audio.classList.remove("active");
-    });
-});
+//         optionMenu_audio.classList.remove("active");
+//     });
+// });
 
 // drop down menu - 영상 
-const optionMenu_video = document.querySelector("#select-video"),
-    selectBtn_video = optionMenu_video.querySelector("#select-btn-video"),
-    options_video = optionMenu_video.querySelectorAll("#option-video"),
-    sBtn_text_video = optionMenu_video.querySelector("#sBtn-text-video");
+// const optionMenu_video = document.querySelector("#select-video"),
+//     selectBtn_video = optionMenu_video.querySelector("#select-btn-video"),
+//     options_video = optionMenu_video.querySelectorAll("#option-video"),
+//     sBtn_text_video = optionMenu_video.querySelector("#sBtn-text-video");
 
-selectBtn_video.addEventListener("click", () => optionMenu_video.classList.toggle("active"));
+// selectBtn_video.addEventListener("click", () => optionMenu_video.classList.toggle("active"));
 
-options_video.forEach(option_video => {
-    option_video.addEventListener("click", () => {
-        let selectedOption_video = option_video.querySelector("#option-text-video").innerText;
-        sBtn_text_video.innerText = selectedOption_video;
+// options_video.forEach(option_video => {
+//     option_video.addEventListener("click", () => {
+//         let selectedOption_video = option_video.querySelector("#option-text-video").innerText;
+//         sBtn_text_video.innerText = selectedOption_video;
 
-        optionMenu_video.classList.remove("active");
-    });
-});
+//         optionMenu_video.classList.remove("active");
+//     });
+// });
 
 
 

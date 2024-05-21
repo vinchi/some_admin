@@ -40,7 +40,7 @@
 
                     </div>
 
-                    <table>
+                    <table id="myTable" class="display">
                         <thead>
                             <tr>
                                 <th><input type="checkbox" class="all-check"></th>
@@ -53,34 +53,44 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="one-check"></td>
-                                <td class="p-num">9852</td>
-                                <td class="p-master">
-                                    <img src="./imges/avatar/Avatar=9.png">
-                                    <p>우리두리 알콩달콩</p>
-                                </td>
-                                <td class="p-users">
-                                    <span class="count">10명</span>
-                                </td>
-                                <td class="p-title">이번 크리스마스 연말에 함께해요</td>
-
-                                <td class="p-starttime">
-                                    <span class="date">24/04/01</span>
-                                    <span class="time">16:44:62</span>
-                                </td>
-                                <td class="p-room-bb">
-                                    <div class="status completed">경고</div>
-                                    <div class="status process">방삭제</div>
-                                </td>
-
-                            </tr>
-
-
+                            <% 
+                                let num = 1;
+                                data.chattings.forEach(chat => {
+                            %>
+                                <tr>
+                                    <td><input type="checkbox" class="one-check"></td>
+                                    <td class="p-num"><a href="/party?uid=<%= chat.chat.docId %>&num=<%= num %>"><%= num %></a></td>
+                                    <td class="p-master">
+                                        <% if(chat.chat.photoUrl) { %>
+                                            <img src="<%= chat.chat.photoUrl %>">
+                                        <% } else { %>
+                                            <img src="./imges/avatar/Avatar=13.png">
+                                        <% } %>
+                                        <p><%= chat.chat.username %></p>
+                                    </td>
+                                    <td class="p-users">
+                                        <span class="count"><%= chat.chat.members.length %>명</span>
+                                    </td>
+                                    <td class="p-title"><%= chat.chat.partyTitle %></td>
+    
+                                    <td class="p-starttime">
+                                        <span class="date"><%= chat.chat.createDate.toDate().toLocaleString() %></span>
+                                        <!-- <span class="time">16:44:62</span> -->
+                                    </td>
+                                    <td class="p-room-bb">
+                                        <div class="status completed">경고</div>
+                                        <div class="status process">방삭제</div>
+                                    </td>
+    
+                                </tr>
+                            <%
+                                    num ++;
+                                });
+                            %>
                         </tbody>
                     </table>
                     <!-- pagination -->
-                    <div class="chat-page">
+                    <!-- <div class="chat-page">
                         <div class="showing-count">
                             <span>Showing:</span>
                             <span>1 - 5</span>
@@ -104,7 +114,7 @@
                             <li><a href="#"><i class='bx bx-chevrons-right'></i></a></li>
 
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
 
                 
@@ -118,10 +128,14 @@
                                     <span class="chat-num">9852</span>
                                 </div>
                                 <div class="chat-profile">
-                                    <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
+                                    <% if(data.chattings[data.num].users.length > 0) { %>
+                                        <img class="profile-image user-1" src="<%= data.chattings[data.num].users[0].photoUrl[0] %>" alt="">
+                                    <% } else { %>
+                                        <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
+                                    <% } %>
                                     <div class="text">
-                                        <h5>우리알콩달콩</h5>
-                                        <p class="memo">인상이 참 좋으싶니다. 저는 서울에사는 공무원 입니다. 대화하고 싶어요</p>
+                                        <h5><%= data.chattings[data.num].chat.partyTitle %></h5>
+                                        <p class="memo"><%= data.chattings[data.num].chat.partyContent %></p>
                                     </div>
                                 </div>
                                 
@@ -131,68 +145,29 @@
                             <div class="user-select-wrap">
                                 <div class="container2">
                                     <div class="select-btn2">
-                                        <span class="btn-text">참여회원 : 10명</span>
+                                        <span class="btn-text">참여회원 : <%= data.chattings[data.num].chat.members.length %>명</span>
                                         <span class="arrow-dwn">
                                             <i class="fa-solid fa-chevron-down"></i>
                                         </span>
                                     </div>
                                     <ul class="list-items">
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-            
-                                            <span class="item-text">우리두리</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=1.png" alt="">
-            
-                                            <span class="item-text">사랑스런 장미</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=4.png" alt="">
-            
-                                            <span class="item-text">내 반쪽을 찾습니다.</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=8.png" alt="">
-            
-                                            <span class="item-text">우리두리</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=9.png" alt="">
-            
-                                            <span class="item-text">우리두리</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-            
-                                            <span class="item-text">우리두리</span>
-                                        </li>
-                                        <li class="item2">
-                                            <span class="checkbox">
-                                                <i class="fa-solid fa-check check-icon"></i>
-                                            </span>
-                                            <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-            
-                                            <span class="item-text">우리두리</span>
-                                        </li>
+                                        <% 
+                                            data.chattings[data.num].users.forEach((user) => {
+                                        %>
+                                            <li class="item2">
+                                                <span class="checkbox">
+                                                    <i class="fa-solid fa-check check-icon"></i>
+                                                </span>
+                                                <% if(user.photoUrl) { %>
+                                                    <img class="profile-image user-1" src="<%= user.photoUrl[0] %>" alt="">
+                                                <% } else { %>
+                                                    <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
+                                                <% } %>
+                                                <span class="item-text"><%= user.username %></span>
+                                            </li>
+                                        <% 
+                                            });
+                                        %>
                                     </ul>
                                 </div>
             
@@ -220,35 +195,75 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- user 1 chat left -->
-                            <div class="user-1-chat">
-                                <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-                                <div class="chat-wrap-left">
-                                    <div class="user-1-name">우리두리 알콩달콩</div>
-                                    <div class="bubble-wrap">
-                                        <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
+                            
+                            <% 
+                                let name = "";
+                                let isMe = false;
+                                data.listChat.forEach((list) => {
+                                    if(name === list.userID) {
+                                        isMe = true;
+                                    } else {
+                                        isMe = false;
+                                        name = list.userID;
+                                    }
+                                
+                                    if(isMe) {
+                            %>
+                                <!-- user 1 chat left -->
+                                <div class="user-1-chat">
+                                    <% if(list.photoUrl) { %>
+                                        <img class="profile-image user-1" src="<%= list.photoUrl %>" alt="">
+                                    <% } else { %>
+                                        <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
+                                    <% } %>
+                                    <div class="chat-wrap-left">
+                                        <div class="user-1-name"><%= list.username %></div>
+                                        <div class="bubble-wrap">
+                                            <div class="chat-bubble">
+                                                <%= list.text %>
+                                            </div>
+                                            <div class="user-1-time">
+                                                <% if(list.time.toDate().getHours() > 12) { %>
+                                                    오후 <%= list.time.toDate().getHours() % 12 %>:<%= list.time.toDate().getMinutes() %>
+                                                <% } else { %>
+                                                    오전 <%= list.time.toDate().getHours() %>:<%= list.time.toDate().getMinutes() %>
+                                                <% } %>
+                                            </div>
                                         </div>
-                                        <div class="user-1-time">오전 4:12</div>
                                     </div>
                                 </div>
-                            </div>
+                            
+                            <% } else { %>
 
                             <!-- user 2 chat right -->
                             <div class="user-2-chat">
                                 <div class="chat-wrap-right">
-                                    <div class="user-2-name">쵸콜릿처럼 달콤함</div>
+                                    <div class="user-2-name"><%= list.username %></div>
                                     <div class="bubble-wrap">
-                                        <div class="user-2-time">오전 4:12</div>
+                                        <div class="user-2-time">
+                                            <% if(list.time.toDate().getHours() > 12) { %>
+                                                오후 <%= list.time.toDate().getHours() % 12 %>:<%= list.time.toDate().getMinutes() %>
+                                            <% } else { %>
+                                                오전 <%= list.time.toDate().getHours() %>:<%= list.time.toDate().getMinutes() %>
+                                            <% } %>
+                                        </div>
 
                                         <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요
+                                            <%= list.text %>
                                         </div>
                                     </div>
                                 </div>
-                                <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
+                                <% if(list.photoUrl) { %>
+                                    <img class="profile-image user-2" src="<%= list.photoUrl %>" alt="">
+                                <% } else { %>
+                                    <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
+                                <% } %>
                             </div>
+                            
+                            <% 
+                                    }
+                                });
+                            %>
 
                             <!-- manager chat center -->
                             <div class="manager-chat">
@@ -262,108 +277,7 @@
                                 </div>
                             </div>
 
-                            <!-- user 1 chat left -->
-                            <div class="user-1-chat">
-                                <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-                                <div class="chat-wrap-left">
-                                    <div class="user-1-name">우리두리 알콩달콩</div>
-                                    <div class="bubble-wrap">
-                                        <div class="chat-bubble">
-                                            hi
-                                        </div>
-                                        <div class="user-1-time">오전 4:12</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- user 2 chat right -->
-                            <div class="user-2-chat">
-                                <div class="chat-wrap-right">
-                                    <div class="user-2-name">쵸콜릿처럼 달콤함</div>
-                                    <div class="bubble-wrap">
-                                        <div class="user-2-time">오전 4:12</div>
-
-                                        <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요
-                                        </div>
-                                    </div>
-                                </div>
-                                <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
-                            </div>
-
-                            <!-- user 2 chat right -->
-                            <div class="user-2-chat">
-                                <div class="chat-wrap-right">
-                                    <div class="user-2-name">쵸콜릿처럼 달콤함</div>
-                                    <div class="bubble-wrap">
-                                        <div class="user-2-time">오전 4:12</div>
-
-                                        <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요
-                                        </div>
-                                    </div>
-                                </div>
-                                <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
-                            </div>
-
-
-                            <!-- user 2 chat right -->
-                            <div class="user-2-chat">
-                                <div class="chat-wrap-right">
-                                    <div class="user-2-name">쵸콜릿처럼 달콤함</div>
-                                    <div class="bubble-wrap">
-                                        <div class="user-2-time">오전 4:12</div>
-
-                                        <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요
-                                        </div>
-                                    </div>
-                                </div>
-                                <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
-                            </div>
-
-
-                            <!-- user 1 chat left -->
-                            <div class="user-1-chat">
-                                <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-                                <div class="chat-wrap-left">
-                                    <div class="user-1-name">우리두리 알콩달콩</div>
-                                    <div class="bubble-wrap">
-                                        <div class="chat-bubble">
-                                            hi
-                                        </div>
-                                        <div class="user-1-time">오전 4:12</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- user 1 chat left -->
-                            <div class="user-1-chat">
-                                <img class="profile-image user-1" src="./imges/avatar/Avatar=12.png" alt="">
-                                <div class="chat-wrap-left">
-                                    <div class="user-1-name">우리두리 알콩달콩</div>
-                                    <div class="bubble-wrap">
-                                        <div class="chat-bubble">
-                                            hi
-                                        </div>
-                                        <div class="user-1-time">오전 4:12</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- user 2 chat right -->
-                            <div class="user-2-chat">
-                                <div class="chat-wrap-right">
-                                    <div class="user-2-name">쵸콜릿처럼 달콤함</div>
-                                    <div class="bubble-wrap">
-                                        <div class="user-2-time">오전 4:12</div>
-
-                                        <div class="chat-bubble">
-                                            안녕하세요안녕하세요안녕하세요안녕하세요
-                                        </div>
-                                    </div>
-                                </div>
-                                <img class="profile-image user-2" src="./imges/avatar/Avatar=2.png" alt="">
-                            </div>
+                            
 
                         </div>
                         <div class="hr bottom"></div>
@@ -380,5 +294,16 @@
                 </div>
                 
             </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        new DataTable('#myTable', {
+            responsive: true
+        });
+    });
+</script>
+<script src="js/dropdown_party.js"></script>
 
 <%- include('partials/footer'); %>

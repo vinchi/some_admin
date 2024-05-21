@@ -44,101 +44,47 @@
                             <button class="btn-search"><i class="bx bx-search"></i></button>
                         </div>
                     </div>
-
+                    
                     <div class="list-wrap">
-
-                        <div class="short-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>비디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="video-item">
-                                <video width="100%" height="240px" autoplay controls loop>
-                                    <source src="./imges/video/IMG_3165.MOV" type="video/MOV">
-                                </video>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="short-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+                        <% 
+                            videos.forEach((video) => {
+                        %>
+                            <div class="short-content">
+                                <div class="content-title">
+                                    <div class="text">
+                                        <input type="checkbox">
+                                        <h5>비디오 쇼츠</h5>
                                     </div>
-                                    <div class="user-id">마리아</div>
-                                </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="short-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>비디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="video-item">
-                                <video width="100%" height="240px" autoplay controls loop>
-                                    <source src="./imges/video/IMG_3165.MOV" type="video/MOV">
-                                </video>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="short-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+                                    <div class="icon">
+                                        <i class='bx bx-dots-vertical-rounded'></i>
                                     </div>
-                                    <div class="user-id">마리아</div>
                                 </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
+                                
+                                <div class="video-item">
+                                    <video width="100%" height="240px" controls>
+                                        <source src="<%= video.videoUrl %>" type="video/mp4">
+                                    </video>
+                                    <div class="text"><%= video.title %></div>
                                 </div>
-                            </div>
-                        </div><div class="short-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>비디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="video-item">
-                                <video width="100%" height="240px" autoplay controls loop>
-                                    <source src="./imges/video/IMG_3165.MOV" type="video/MOV">
-                                </video>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="short-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+    
+                                <div class="short-bottom-wrap">
+                                    <div class="profile-wrap">
+                                        <div class="user-img">
+                                            <% if(video.photoUrl) { %>
+                                                <img src="<%= video.photoUrl %>" width="42px" height="42px">
+                                            <% } else { %>
+                                                <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+                                            <% } %>
+                                        </div>
+                                        <div class="user-id"><%= video.username %></div>
                                     </div>
-                                    <div class="user-id">마리아</div>
-                                </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
+                                    <div class="comment-wrap">
+                                        <i class='bx bx-comment-detail' ></i>
+                                        <span><%= video.favorite.length %></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <% }); %>
                     </div>
                     <!-- pagination -->
                     <div class="chat-page">
