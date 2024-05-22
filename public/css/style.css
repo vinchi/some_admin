@@ -2296,11 +2296,11 @@ td{
     outline: 0;
 }
 .push-list .table-wrap{
-    height : 520px;
+    height : 590px;
     overflow : auto;
 }
 .push-send-list .table-wrap{
-    height : 520px;
+    height : 590px;
     overflow : auto;
 }
 .push-list table.push-user-list{
@@ -2353,7 +2353,6 @@ td{
 .content main .push-management .push-list table tbody tr:hover{
     background: var(--grey);
 }
-
 
 .send-msg-wrap {
     display: flex;
@@ -2495,13 +2494,11 @@ td{
     font-weight: 600;
 }
 
-
 /* search form style start */
 
 .push-send-list .search-box{
     position: relative;
 }
-
 .push-send-list .input-search {
     width:250px;
     border-style: none;
@@ -2537,11 +2534,9 @@ td{
 }
 
 
-
 /*-----------------------------------*\
     # 공지 관리 (announcement.html)
 \*-----------------------------------*/
-
 
 .content main .announcement-management{
     display: flex;
