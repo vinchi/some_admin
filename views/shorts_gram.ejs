@@ -154,13 +154,18 @@
                             <div class="short-bottom-wrap">
                                 <div class="profile-wrap">
                                     <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+                                        <% if(gram.photoUrl) { %>
+                                            <img style="border-radius: 50%;" src="<%= gram.photoUrl %>" width="42px" height="42px">
+                                        <% } else { %>
+                                            <img src="./imges/avatar/Avatar=1.png" width="42px" height="42px">
+                                        <% } %>
+                                        
                                     </div>
-                                    <div class="user-id">마리아</div>
+                                    <div class="user-id"><%= gram.username %></div>
                                 </div>
                                 <div class="comment-wrap">
                                     <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
+                                    <span><%= gram.favorite.length %></span>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +216,9 @@
                     </div>
 
                     <div class="list-wrap">
-
+                        <% 
+                            audios.forEach((audio) => {
+                        %>
                         <div class="audio-content">
                             <div class="content-title">
                                 <div class="text">
@@ -225,119 +232,31 @@
                             
                             <div class="audio-item">
                                 <div class="audio-wrap">
-                                    <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
+                                    <audio controls disableRemotePlayback src="<%= audio.voiceUrl %>"></audio>
                                 </div>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
+                                <div class="text"><%= audio.title %></div>
                             </div>
 
                             <div class="audio-bottom-wrap">
                                 <div class="profile-wrap">
                                     <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=6.png" width="42px" height="42px">
+                                        <% if(audio.photoUrl) { %>
+                                            <img style="border-radius: 50%;" src="<%= audio.photoUrl %>" width="42px" height="42px">
+                                        <% } else { %>
+                                            <img src="./imges/avatar/Avatar=6.png" width="42px" height="42px">
+                                        <% } %>
                                     </div>
-                                    <div class="user-id">상큼딸기</div>
+                                    <div class="user-id"><%= audio.username %></div>
                                 </div>
                                 <div class="comment-wrap">
                                     <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
+                                    <span><%= audio.favorite.length %></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="audio-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>오디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="audio-item">
-                                <div class="audio-wrap">
-                                    <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
-                                </div>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="audio-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=6.png" width="42px" height="42px">
-                                    </div>
-                                    <div class="user-id">상큼딸기</div>
-                                </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="audio-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>오디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="audio-item">
-                                <div class="audio-wrap">
-                                    <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
-                                </div>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="audio-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=6.png" width="42px" height="42px">
-                                    </div>
-                                    <div class="user-id">상큼딸기</div>
-                                </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
-                                </div>
-                            </div>
-                        </div><div class="audio-content">
-                            <div class="content-title">
-                                <div class="text">
-                                    <input type="checkbox">
-                                    <h5>오디오 쇼츠</h5>
-                                </div>
-                                <div class="icon">
-                                    <i class='bx bx-dots-vertical-rounded'></i>
-                                </div>
-                            </div>
-                            
-                            <div class="audio-item">
-                                <div class="audio-wrap">
-                                    <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
-                                </div>
-                                <div class="text">오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.오늘 하루도 행복하세요.</div>
-                            </div>
-
-                            <div class="audio-bottom-wrap">
-                                <div class="profile-wrap">
-                                    <div class="user-img">
-                                        <img src="./imges/avatar/Avatar=6.png" width="42px" height="42px">
-                                    </div>
-                                    <div class="user-id">상큼딸기</div>
-                                </div>
-                                <div class="comment-wrap">
-                                    <i class='bx bx-comment-detail' ></i>
-                                    <span>15</span>
-                                </div>
-                            </div>
-                        </div>
-
-
-
+                        <% 
+                            });
+                        %>
                     </div>
 
                     <!-- pagination -->

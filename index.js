@@ -508,8 +508,167 @@ app.get('/shorts_gram', async (req, res) => {
 });
 
 app.get('/sales', async (req, res) => {
-  res.render('sales', {activeMenu: 'menu6', sidebar: sidebarOpen});
+  const uid = req.query.uid || 0;
+  const num = req.query.num || 0;
+  
+  const locals = {
+    title: "매출관리 | 썸푸닝",
+    description: "매출관리 입니다."
+  };
+  
+  try {   
+    // 매일의 매출을 저장할 객체
+    const dailyRevenue = {};
+    let revenueDates = [];
+    let revenueDays = [];
+    
+    
+    // users 컬렉션에서 문서 가져오기
+    db.collection('users').get().then((querySnapshot) => {
+        const promises = [];
+        querySnapshot.forEach((userDoc) => {
+          const buyDiaCollection = userDoc.ref.collection('buyDia');
+    
+          // buyDia 컬렉션의 모든 문서 가져오기
+          const promise = buyDiaCollection.get().then((buyDiaSnapshot) => {
+              buyDiaSnapshot.forEach((buyDoc) => {
+                const buyDate = buyDoc.data().buyDate.toDate().toISOString().split('T')[0]; // 날짜만 추출
+                const price = parseInt(buyDoc.data().price.replaceAll(',', ''));
+    
+                // 매일의 매출 합 구하기
+                if (dailyRevenue[buyDate]) {
+                  dailyRevenue[buyDate] += price;
+                } else {
+                  dailyRevenue[buyDate] = price;
+                }
+              });
+            })
+            .catch((error) => {
+              console.error('buyDia 컬렉션에서 문서를 가져오는 동안 오류 발생:', error);
+            });
+    
+          promises.push(promise);
+        });
+    
+        return Promise.all(promises);
+      }).then(() => {
+        // 모든 날짜에 대해 매출이 0인 경우 0으로 설정
+        const startDate = new Date('2024-04-01');
+        const endDate = new Date();
+    
+        for (let date = new Date(startDate); date <= endDate; date.setDate(date.getDate() + 1)) {
+          const formattedDate = date.toISOString().split('T')[0];
+          if (!dailyRevenue[formattedDate]) {
+            dailyRevenue[formattedDate] = 0;
+          }
+        }
+    
+        // 매출 데이터를 날짜별로 소팅 (최근 날짜가 먼저 오도록)
+        const sortedDailyRevenue = Object.keys(dailyRevenue)
+          .sort((a, b) => new Date(b) - new Date(a))
+          .reduce((acc, date) => {
+            acc[date] = dailyRevenue[date];
+            return acc;
+          }, {});
+    
+        // 소팅된 매출 데이터 출력
+        Object.keys(sortedDailyRevenue).forEach((date) => {
+          // console.log(`${date}: ${sortedDailyRevenue[date]}`);
+          revenueDates.push(date);
+          revenueDays.push(sortedDailyRevenue[date]);
+        });
+        
+        let sum = 0;
+        let cumulative = new Array(revenueDays.length);
+        for(let i=revenueDays.length-1 ; i>=0 ; i--) {
+          sum += revenueDays[i];
+          cumulative[i] = sum;
+        }
+        
+        let usernames = [];
+        let userids = [];
+        let todayRevenues = [];
+        let cumulRevenues = [];
+        
+        getUsersRevenue().then((revenues) => {
+          res.render('sales', {
+            locals: locals,
+            activeMenu: 'menu6', 
+            sidebar: sidebarOpen,
+            revenueDates: revenueDates,
+            revenueDays: revenueDays,
+            cumulative: cumulative,
+            revenues: revenues
+          });
+        }).catch((error) => {
+          console.error('error');
+        });
+      })
+      .catch((error) => {
+        console.error('users 컬렉션에서 문서를 가져오는 동안 오류 발생:', error);
+      });
+  } catch(error) {
+    console.log(error);
+  }
 });
+
+const getUsersRevenue = () => {
+  return new Promise((resolve, reject) => {
+    const usersRevenue = [];
+    
+    const today = new Date().toISOString().split('T')[0];
+
+    // users 컬렉션에서 문서 가져오기
+    db.collection('users').get().then((querySnapshot) => {
+        const userPromises = [];
+
+        querySnapshot.forEach((userDoc) => {
+          const username = userDoc.data().username;
+          const userId = userDoc.id;
+          const buyDiaCollection = userDoc.ref.collection('buyDia');
+          
+          const userPromise = new Promise((resolve, reject) => {
+            let totalRevenue = 0;
+            let todayRevenue = 0;
+
+            // buyDia 컬렉션의 오늘 매출 구하기
+            buyDiaCollection.where('buyDate', '==', new Date(today)).get()
+              .then((todayBuySnapshot) => {
+                todayBuySnapshot.forEach((todayBuyDoc) => {
+                  todayRevenue += parseInt(todayBuyDoc.data().price.replaceAll(',', ''));
+                });
+
+                // buyDia 컬렉션의 모든 매출 누적하기
+                buyDiaCollection.get().then((buyDiaSnapshot) => {
+                    buyDiaSnapshot.forEach((buyDoc) => {
+                      totalRevenue += parseInt(buyDoc.data().price.replaceAll(',', ''));
+                    });
+
+                    // 사용자의 매출 정보 저장
+                    usersRevenue.push({
+                      username: username,
+                      userId: userId,
+                      todayRevenue: todayRevenue,
+                      totalRevenue: totalRevenue
+                    });
+
+                    resolve();
+                  })
+                  .catch((error) => reject(error));
+              })
+              .catch((error) => reject(error));
+          });
+
+          userPromises.push(userPromise);
+        });
+
+        Promise.all(userPromises)
+          .then(() => resolve(usersRevenue))
+          .catch((error) => reject(error));
+      })
+      .catch((error) => reject(error));
+  });
+}
 
 app.get('/push', async (req, res) => {
   res.render('push', {activeMenu: 'menu7', sidebar: sidebarOpen});
