@@ -1,5 +1,3 @@
-
-
 // drop down menu - 프로필사진
 const optionMenu_photo = document.querySelector("#select-photo"),
     selectBtn_photo = optionMenu_photo.querySelector("#select-btn-photo"),
@@ -16,41 +14,6 @@ options_photo.forEach(option_photo => {
         optionMenu_photo.classList.remove("active");
     });
 });
-
-// drop down menu - 음성
-const optionMenu_audio = document.querySelector("#select-audio"),
-    selectBtn_audio = optionMenu_audio.querySelector("#select-btn-audio"),
-    options_audio = optionMenu_audio.querySelectorAll("#option-audio"),
-    sBtn_text_audio = optionMenu_audio.querySelector("#sBtn-text-audio");
-
-selectBtn_audio.addEventListener("click", () => optionMenu_audio.classList.toggle("active"));
-
-options_audio.forEach(option_audio => {
-    option_audio.addEventListener("click", () => {
-        let selectedOption_audio = option_audio.querySelector("#option-text-audio").innerText;
-        sBtn_text_audio.innerText = selectedOption_audio;
-
-        optionMenu_audio.classList.remove("active");
-    });
-});
-
-// drop down menu - 영상 
-const optionMenu_video = document.querySelector("#select-video"),
-    selectBtn_video = optionMenu_video.querySelector("#select-btn-video"),
-    options_video = optionMenu_video.querySelectorAll("#option-video"),
-    sBtn_text_video = optionMenu_video.querySelector("#sBtn-text-video");
-
-selectBtn_video.addEventListener("click", () => optionMenu_video.classList.toggle("active"));
-
-options_video.forEach(option_video => {
-    option_video.addEventListener("click", () => {
-        let selectedOption_video = option_video.querySelector("#option-text-video").innerText;
-        sBtn_text_video.innerText = selectedOption_video;
-
-        optionMenu_video.classList.remove("active");
-    });
-});
-
 
 
 // drop down menu1 - 국적
@@ -223,3 +186,23 @@ options09.forEach(option09 => {
 });
 
 
+
+
+// drop down menu - 유저프로파일 드롭다운
+const selectBtn2 = document.querySelector(".select-btn2"),
+    items = document.querySelectorAll(".item2");
+    selectBtn2.addEventListener("click", () => {
+    selectBtn2.classList.toggle("open");
+});
+items.forEach(item2 => {
+    item2.addEventListener("click", () => {
+        item2.classList.toggle("checked");
+        let checked = document.querySelectorAll(".checked"),
+            btnText = document.querySelector(".btn-text");
+        if (checked && checked.length > 0) {
+            btnText.innerText = `반려사유 ${checked.length} 개를 선택했습니다.`;
+        } else {
+            btnText.innerText = "반려사유를 선택해주세요";
+        }
+    });
+})
