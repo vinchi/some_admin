@@ -152,9 +152,10 @@ window.onload = initializer();
             dropbtn.addEventListener('click', function() {
                 console.log("드랍다운 클릭")
             });
+            dropbtn.style.borderColor = 'rgb(94, 94, 94)';
         })
         v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
+        
     }
 
     showMenu = (value) => {
@@ -165,8 +166,6 @@ window.onload = initializer();
 
         dropbtn_icon.innerText = '';
         dropbtn_content.innerText = value;
-        // dropbtn_content.style.color = '#252525';
-        // dropbtn.style.borderColor = '#3992a8';
     }
 // }
 window.onclick = (e) => {

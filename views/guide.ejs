@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <table>
+                    <table id="myTable">
                         <thead>
                             <tr>
                                 <th class="input"><input type="checkbox" class="all-check"></th>
@@ -50,37 +50,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% 
+                                guides.forEach((guide) => {
+                            %>
                             <tr>
                                 <td><input type="checkbox" class="one-check"></td>
-                                <td class="event">[ 이벤트 ]</td>
-                                <td>썸푸닝 가이드</td>
-                                <td>2024/04/01, 16:44:62</td>
+                                <td class="event">[ 가이드 ]</td>
+                                <td><%= guide.title %></td>
+                                <td><%= guide.writeDate.toDate().toLocaleString() %></td>
                                 <td><span class="status completed">수정</span>
-                                    <span class="status danger">삭제</span>
+                                    <a href="/deleteGuide/<%= guide.uid %>" class="status danger">삭제</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox" class="one-check"></td>
-                                <td class="event">[ 이벤트 ]</td>
-                                <td>썸푸닝 가이드</td>
-                                <td>2024/04/01, 16:44:62</td>
-                                <td><span class="status completed">수정</span>
-                                    <span class="status danger">삭제</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="one-check"></td>
-                                <td class="event">[ 이벤트 ]</td>
-                                <td>썸푸닝 가이드</td>
-                                <td>2024/04/01, 16:44:62</td>
-                                <td><span class="status completed">수정</span>
-                                    <span class="status danger">삭제</span>
-                                </td>
-                            </tr>
+                            <% 
+                                });
+                            %>
                         </tbody>
                     </table>
                     <!-- pagination -->
-                    <div class="bl-page">
+                    <!-- <div class="bl-page">
                         <div class="showing-count">
                             <span>Showing:</span>
                             <span>1 - 3</span>
@@ -103,135 +91,144 @@
                             <li><a href="#"><i class='bx bx-chevron-right' ></i></i></a></li>
                             <li><a href="#"><i class='bx bx-chevrons-right' ></i></a></li>
                             
-                        </ul>
-                    </div>
-
-                    <div class="editor-wrap">
-                        <div class="dropdown-wrap">
-                            <div class="dropdown">
-                                <button class="dropbtn">
-                                    <span class="dropbtn_icon" style="display: none;">more_horiz</span>
-                                    <span class="dropbtn_content">--- 분류 ---</span>
-                                    <span class="dropbtn_click" onclick="dropdown()">arrow_drop_down</span>
-                                </button>
+                        </ul> 
+                    </div>  -->
+                    <form action="/addGuide" method="POST">
+                        <div class="editor-wrap">
+                            <div class="dropdown-wrap">
+                                <div class="dropdown">
+                                    <button class="dropbtn">
+                                        <span class="dropbtn_icon" style="display: none;">more_horiz</span>
+                                        <span class="dropbtn_content">--- 분류 ---</span>
+                                        <span class="dropbtn_click" onclick="dropdown()">arrow_drop_down</span>
+                                    </button>
+            
+                                    <div class="dropdown-content">
+                                        <div class="dataclass" onclick="showMenu(this.innerText)">[ 포인트 ]</div>
+                                        <div class="dataclass" onclick="showMenu(this.innerText)">[ 긴 급 ]</div>
+                                        <div class="dataclass" onclick="showMenu(this.innerText)">[ 이벤트 ]</div>
+                                        <div class="dataclass" onclick="showMenu(this.innerText)">[ 기타1 ]</div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="class-title-wrap">
+                                    <input type="text" class="class-title" name="title" placeholder="제목을 입력해주세요">
+                                </div>
+                                <button type="submit" class="editor-btn">공지올리기</button>
+                            </div>
         
-                                <div class="dropdown-content">
-                                    <div class="dataclass" onclick="showMenu(this.innerText)">[ 포인트 ]</div>
-                                    <div class="dataclass" onclick="showMenu(this.innerText)">[ 긴 급 ]</div>
-                                    <div class="dataclass" onclick="showMenu(this.innerText)">[ 이벤트 ]</div>
-                                    <div class="dataclass" onclick="showMenu(this.innerText)">[ 기타1 ]</div>
-                                    
-                                </div>
-                            </div>
-                            <div class="class-title-wrap">
-                                <input type="text" class="class-title" placeholder="제목을 입력해주세요">
-                            </div>
-                            <div class="editor-btn">공지올리기</div>
-                        </div>
-    
-                        <div class="editor-container">
-                            <div class="options">
-                                <div class="option-wrap">
-                                    <!-- Text Format -->
-                                    <button id="bold" class="option-button format">
-                                        <i class="fa-solid fa-bold"></i>
-                                    </button>
-                                    <button id="italic" class="option-button format">
-                                        <i class="fa-solid fa-italic"></i>
-                                    </button>
-                                    <button id="underline" class="option-button format">
-                                        <i class="fa-solid fa-underline"></i>
-                                    </button>
-                                    <button id="strikethrough" class="option-button format">
-                                        <i class="fa-solid fa-strikethrough"></i>
-                                    </button>
-                                    <button id="superscript" class="option-button script">
-                                        <i class="fa-solid fa-superscript"></i>
-                                    </button>
-                                    <button id="subscript" class="option-button script">
-                                        <i class="fa-solid fa-subscript"></i>
-                                    </button>
-                            
-                                    <!-- List -->
-                                    <button id="insertOrderedList" class="option-button">
-                                        <div class="fa-solid fa-list-ol"></div>
-                                    </button>
-                                    <button id="insertUnorderedList" class="option-button">
-                                        <i class="fa-solid fa-list"></i>
-                                    </button>
-                                    <!-- Undo/Redo -->
-                                    <button id="undo" class="option-button">
-                                        <i class="fa-solid fa-rotate-left"></i>
-                                    </button>
-                                    <button id="redo" class="option-button">
-                                        <i class="fa-solid fa-rotate-right"></i>
-                                    </button>
-                            
-                                    <!-- Link -->
-                                    <button id="createLink" class="adv-option-button">
-                                        <i class="fa fa-link"></i>
-                                    </button>
-                                    <button id="unlink" class="option-button">
-                                        <i class="fa fa-unlink"></i>
-                                    </button>
-                                </div>
-    
-                                <div class="option-wrap">
-                                    <!-- Alignment -->
-                                    <button id="justifyLeft" class="option-button align">
-                                        <i class="fa-solid fa-align-left"></i>
-                                    </button>
-                                    <button id="justifyCenter" class="option-button align">
-                                        <i class="fa-solid fa-align-center"></i>
-                                    </button>
-                                    <button id="justifyRight" class="option-button align">
-                                        <i class="fa-solid fa-align-right"></i>
-                                    </button>
-                                    <button id="justifyFull" class="option-button align">
-                                        <i class="fa-solid fa-align-justify"></i>
-                                    </button>
-                                    <button id="indent" class="option-button spacing">
-                                        <i class="fa-solid fa-indent"></i>
-                                    </button>
-                                    <button id="outdent" class="option-button spacing">
-                                        <i class="fa-solid fa-outdent"></i>
-                                    </button>
-                                </div>
-    
-                                <div class="option-wrap">
-                                    <!-- Headings -->
-                                    <select id="formatBlock" class="adv-option-button">
-                                        <option value="H1">H1</option>
-                                        <option value="H2">H2</option>
-                                        <option value="H3">H3</option>
-                                        <option value="H4">H4</option>
-                                        <option value="H5">H5</option>
-                                        <option value="H6">H6</option>
-                                    </select>
-                            
-                                    <!-- Font -->
-                                    <select id="fontName" class="adv-option-button"></select>
-                                    <select id="fontSize" class="adv-option-button"></select>
-                            
-                                </div>
-    
-                                <div class="option-wrap">
-                                    <!-- Color -->
-                                    <div class="input-wrapper">
-                                        <input type="color" id="foreColor" class="adv-option-button" />
-                                        <label for="foreColor">Font Color</label>
+                            <div class="editor-container">
+                                <div class="options">
+                                    <div class="option-wrap">
+                                        <!-- Text Format -->
+                                        <button id="bold" class="option-button format">
+                                            <i class="fa-solid fa-bold"></i>
+                                        </button>
+                                        <button id="italic" class="option-button format">
+                                            <i class="fa-solid fa-italic"></i>
+                                        </button>
+                                        <button id="underline" class="option-button format">
+                                            <i class="fa-solid fa-underline"></i>
+                                        </button>
+                                        <button id="strikethrough" class="option-button format">
+                                            <i class="fa-solid fa-strikethrough"></i>
+                                        </button>
+                                        <button id="superscript" class="option-button script">
+                                            <i class="fa-solid fa-superscript"></i>
+                                        </button>
+                                        <button id="subscript" class="option-button script">
+                                            <i class="fa-solid fa-subscript"></i>
+                                        </button>
+                                
+                                        <!-- List -->
+                                        <button id="insertOrderedList" class="option-button">
+                                            <div class="fa-solid fa-list-ol"></div>
+                                        </button>
+                                        <button id="insertUnorderedList" class="option-button">
+                                            <i class="fa-solid fa-list"></i>
+                                        </button>
+                                        <!-- Undo/Redo -->
+                                        <button id="undo" class="option-button">
+                                            <i class="fa-solid fa-rotate-left"></i>
+                                        </button>
+                                        <button id="redo" class="option-button">
+                                            <i class="fa-solid fa-rotate-right"></i>
+                                        </button>
+                                
+                                        <!-- Link -->
+                                        <button id="createLink" class="adv-option-button">
+                                            <i class="fa fa-link"></i>
+                                        </button>
+                                        <button id="unlink" class="option-button">
+                                            <i class="fa fa-unlink"></i>
+                                        </button>
                                     </div>
-                                    <div class="input-wrapper">
-                                        <input type="color" id="backColor" class="adv-option-button" />
-                                        <label for="backColor">Highlight Color</label>
+        
+                                    <div class="option-wrap">
+                                        <!-- Alignment -->
+                                        <button id="justifyLeft" class="option-button align">
+                                            <i class="fa-solid fa-align-left"></i>
+                                        </button>
+                                        <button id="justifyCenter" class="option-button align">
+                                            <i class="fa-solid fa-align-center"></i>
+                                        </button>
+                                        <button id="justifyRight" class="option-button align">
+                                            <i class="fa-solid fa-align-right"></i>
+                                        </button>
+                                        <button id="justifyFull" class="option-button align">
+                                            <i class="fa-solid fa-align-justify"></i>
+                                        </button>
+                                        <button id="indent" class="option-button spacing">
+                                            <i class="fa-solid fa-indent"></i>
+                                        </button>
+                                        <button id="outdent" class="option-button spacing">
+                                            <i class="fa-solid fa-outdent"></i>
+                                        </button>
+                                    </div>
+        
+                                    <div class="option-wrap">
+                                        <!-- Headings -->
+                                        <select id="formatBlock" class="adv-option-button">
+                                            <option value="H1">H1</option>
+                                            <option value="H2">H2</option>
+                                            <option value="H3">H3</option>
+                                            <option value="H4">H4</option>
+                                            <option value="H5">H5</option>
+                                            <option value="H6">H6</option>
+                                        </select>
+                                
+                                        <!-- Font -->
+                                        <select id="fontName" class="adv-option-button"></select>
+                                        <select id="fontSize" class="adv-option-button"></select>
+                                
+                                    </div>
+        
+                                    <div class="option-wrap">
+                                        <!-- Color -->
+                                        <div class="input-wrapper">
+                                            <input type="color" id="foreColor" class="adv-option-button" />
+                                            <label for="foreColor">Font Color</label>
+                                        </div>
+                                        <div class="input-wrapper">
+                                            <input type="color" id="backColor" class="adv-option-button" />
+                                            <label for="backColor">Highlight Color</label>
+                                        </div>
                                     </div>
                                 </div>
+                                <textarea id="text-input" name="content" contenteditable="true"></textarea>
                             </div>
-                            <div id="text-input" contenteditable="true"></div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
             </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        new DataTable('#myTable', {
+            responsive: true
+        });
+    });
+</script>
 <%- include('partials/footer'); %>

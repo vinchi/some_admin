@@ -105,7 +105,7 @@
                         <div class="user-item">
                             <div class="title">유저 ID</div>
                             <div class="user-content">
-                                <input type="text" placeholder="sdosdijsdijfoijsdff" value="<%= user.uid %>"></input>
+                                <input type="text" placeholder="sdosdijsdijfoijsdff" id="uid" value="<%= user.uid %>"></input>
                             </div>
                         </div>
                         <div class="user-item">
@@ -219,9 +219,8 @@
                                     </div>
                                     <ul class="options" id="region">
                                         <% var num = 0; region.forEach(reg => { %>
-                                            <li class="option" id="region-<%= num %>">
-                                                <!-- <i class="bx bxl-github" style="color: #171515;"></i> -->
-                                                <span class="option-text" id="option-text-<%= num %>"><%= region[num] %></span>
+                                            <li class="option" id="option-02">
+                                                <span class="option-text" id="option-text-02"><%= region[num] %></span>
                                             </li>
                                         <% num++; }) %>                                        
                                     </ul>
@@ -233,16 +232,15 @@
                             <div class="title">학력</div>
                             <div class="user-content">
 
-                                <div class="select-menu" id="education-03">
-                                    <div class="select-btn" id="education-btn-03">
-                                        <span class="education-text" id="education-text-03"><%= education[user.education] %></span>
+                                <div class="select-menu" id="select-03">
+                                    <div class="select-btn" id="select-btn-03">
+                                        <span class="education-text" id="sBtn-text-03"><%= education[user.education] %></span>
                                         <i class="bx bx-chevron-down"></i>
                                     </div>
                                     <ul class="options" id="education">
                                         <% num = 0; education.forEach(edu => { %>
-                                            <li class="option" id="education-<%= num %>">
-                                                <!-- <i class="bx bxl-github" style="color: #171515;"></i> -->
-                                                <span class="education-text" id="education-text-<%= num %>"><%= education[num] %></span>
+                                            <li class="option" id="option-03">
+                                                <span class="option-text" id="option-text-03"><%= education[num] %></span>
                                             </li>
                                         <% num++; }) %>
                                     </ul>
@@ -260,8 +258,8 @@
                                     </div>
                                     <ul class="options" id="job">
                                         <% num = 0; job.forEach(j => { %>
-                                        <li class="option" id="job-<%= num %>">
-                                            <span class="job-text" id="job-text-<%= num %>"><%= job[num] %></span>
+                                        <li class="option" id="option-04">
+                                            <span class="option-text" id="option-text-04"><%= job[num] %></span>
                                         </li>
                                         <% num++; }) %>
                                     </ul>
@@ -488,5 +486,6 @@
 
 
 <script src="js/modal.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="js/dropdown_user_pro.js"></script>
 <%- include('partials/footer'); %>

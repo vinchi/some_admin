@@ -1,58 +1,5 @@
 
 
-// drop down menu - 프로필사진
-// const optionMenu_photo = document.querySelector("#select-photo"),
-//     selectBtn_photo = optionMenu_photo.querySelector("#select-btn-photo"),
-//     options_photo = optionMenu_photo.querySelectorAll("#option-photo"),
-//     sBtn_text_photo = optionMenu_photo.querySelector("#sBtn-text-photo");
-
-// selectBtn_photo.addEventListener("click", () => optionMenu_photo.classList.toggle("active"));
-
-// options_photo.forEach(option_photo => {
-//     option_photo.addEventListener("click", () => {
-//         let selectedOption_photo = option_photo.querySelector("#option-text-photo").innerText;
-//         sBtn_text_photo.innerText = selectedOption_photo;
-
-//         optionMenu_photo.classList.remove("active");
-//     });
-// });
-
-// drop down menu - 음성
-// const optionMenu_audio = document.querySelector("#select-audio"),
-//     selectBtn_audio = optionMenu_audio.querySelector("#select-btn-audio"),
-//     options_audio = optionMenu_audio.querySelectorAll("#option-audio"),
-//     sBtn_text_audio = optionMenu_audio.querySelector("#sBtn-text-audio");
-
-// selectBtn_audio.addEventListener("click", () => optionMenu_audio.classList.toggle("active"));
-
-// options_audio.forEach(option_audio => {
-//     option_audio.addEventListener("click", () => {
-//         let selectedOption_audio = option_audio.querySelector("#option-text-audio").innerText;
-//         sBtn_text_audio.innerText = selectedOption_audio;
-
-//         optionMenu_audio.classList.remove("active");
-//     });
-// });
-
-// drop down menu - 영상 
-// const optionMenu_video = document.querySelector("#select-video"),
-//     selectBtn_video = optionMenu_video.querySelector("#select-btn-video"),
-//     options_video = optionMenu_video.querySelectorAll("#option-video"),
-//     sBtn_text_video = optionMenu_video.querySelector("#sBtn-text-video");
-
-// selectBtn_video.addEventListener("click", () => optionMenu_video.classList.toggle("active"));
-
-// options_video.forEach(option_video => {
-//     option_video.addEventListener("click", () => {
-//         let selectedOption_video = option_video.querySelector("#option-text-video").innerText;
-//         sBtn_text_video.innerText = selectedOption_video;
-
-//         optionMenu_video.classList.remove("active");
-//     });
-// });
-
-
-
 // drop down menu1 - 국적
 const optionMenu = document.querySelector("#select-01"),
     selectBtn = optionMenu.querySelector("#select-btn-01"),
@@ -64,6 +11,7 @@ selectBtn.addEventListener("click", () => optionMenu.classList.toggle("active"))
 options.forEach(option => {
     option.addEventListener("click", () => {
         let selectedOption = option.querySelector("#option-text-01").innerText;
+        
         sBtn_text.innerText = selectedOption;
 
         optionMenu.classList.remove("active");
@@ -82,6 +30,24 @@ options02.forEach(option02 => {
     option02.addEventListener("click", () => {
         let selectedOption02 = option02.querySelector("#option-text-02").innerText;
         sBtn_text02.innerText = selectedOption02;
+        console.log(selectedOption02);
+        
+        const data = {
+            uid: $("#uid").val(),
+            region: selectedOption02,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateRegion",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("지역변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
         optionMenu02.classList.remove("active");
     });
@@ -99,6 +65,23 @@ options03.forEach(option03 => {
     option03.addEventListener("click", () => {
         let selectedOption03 = option03.querySelector("#option-text-03").innerText;
         sBtn_text03.innerText = selectedOption03;
+        
+        const data = {
+            uid: $("#uid").val(),
+            edu: selectedOption03,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateEducation",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("학력이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
         optionMenu03.classList.remove("active");
     });
@@ -116,6 +99,23 @@ options03_1.forEach(option03_1 => {
     option03_1.addEventListener("click", () => {
         let selectedOption03_1 = option03_1.querySelector("#option-text-03-1").innerText;
         sBtn_text03_1.innerText = selectedOption03_1;
+        
+        const data = {
+            uid: $("#uid").val(),
+            job: selectedOption03_1,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateEducation",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("지역변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
         optionMenu03_1.classList.remove("active");
     });

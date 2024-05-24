@@ -38,13 +38,13 @@
                         <i class='bx bx-no-entry'></i>
                         <h3>신고사항</h3>
 
-                        <div class="search-box">
+                        <!-- <div class="search-box">
                             <input type="text" class="input-search" placeholder="검색어를 입력해주세요">
                             <button class="btn-search"><i class="bx bx-search"></i></button>
-                        </div>
+                        </div> -->
                     </div>
 
-                    <table>
+                    <table id="myTable">
                         <thead>
                             <tr>
                                 <th><input type="checkbox" class="all-check"></th>
@@ -57,14 +57,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% 
+                                let num = 1;
+                                reports.forEach((report) => {
+                            %>
                             <tr>
                                 <td><input type="checkbox" class="one-check"></td>
-                                <td>123</td>
-                                <td class="profile-name">
-                                    
+                                <td><%= num %></td>
+                                <td class="profile-name"> 
                                     <a href="/user_profile?slug=menu9">
-                                        <img src="./imges/avatar/Avatar=10.png">
-                                        <p>누구에요</p>
+                                        <% if(report.user.photoUrl.length > 0) { %>
+                                            <img src="<%= report.user.photoUrl[0] %>">
+                                        <% } else { %>
+                                            <img src="./imges/avatar/Avatar=10.png">
+                                        <% } %>
+                                        <p><%= report.user.username %></p>
                                     </a>
                                 </td>
                                 <td>
@@ -77,25 +84,24 @@
                                         </div>
                                         <span>에 대한 음란신고 접수되었습니다.</span>
                                     </div>
-
                                 </td>
-                                <td>2024/04/01, 16:44:62</td>
+                                <td><%= report.regDate.toDate().toLocaleString() %></td>
                                 <td>
-                                
                                     <div class="wrapper-send">
                                         <input type="text" placeholder="신고자에게 보낼 메세지를 입력해주세요" class="report-send">
                                         <i class='bx bx-send'></i>
                                     </div>
-                                    
                                 </td>
                                 <td>처리중</td>
-                                
                             </tr>
-                            
+                            <% 
+                                    num++;
+                                });
+                            %>
                         </tbody>
                     </table>
                     <!-- pagination -->
-                    <div class="chat-page">
+                    <!-- <div class="chat-page">
                         <div class="showing-count">
                             <span>Showing:</span>
                             <span>1 - 8</span>
@@ -119,9 +125,17 @@
                             <li><a href="#"><i class='bx bx-chevrons-right' ></i></a></li>
                             
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        new DataTable('#myTable', {
+            responsive: true
+        });
+    });
+</script>
 <%- include('partials/footer'); %>

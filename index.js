@@ -585,11 +585,6 @@ app.get('/sales', async (req, res) => {
           cumulative[i] = sum;
         }
         
-        let usernames = [];
-        let userids = [];
-        let todayRevenues = [];
-        let cumulRevenues = [];
-        
         getUsersRevenue().then((revenues) => {
           res.render('sales', {
             locals: locals,
@@ -671,19 +666,102 @@ const getUsersRevenue = () => {
 }
 
 app.get('/push', async (req, res) => {
-  res.render('push', {activeMenu: 'menu7', sidebar: sidebarOpen});
+  let uid = req.query.uid || 0;
+  let num = req.query.num || 0;
+  
+  const locals = {
+    title: "푸쉬 | 썸푸닝",
+    description: "푸쉬페이지 입니다."
+  };
+  
+  try {
+    let data = {};
+    
+    let users = [];
+    let pushs = [];
+    let snapshot = await db.collection('users').orderBy('createDate', 'desc').get();
+    for(let i=0 ; i<snapshot.docs.length ; i++) {
+      users.push(snapshot.docs[i].data());
+    }
+    
+    snapshot = await db.collection('pushCard').orderBy('regDate', 'desc').get();
+    for(let j=0 ; j<snapshot.docs.length ; j++) {
+      pushs.push(snapshot.docs[j].data());
+    }
+    
+    data.users = users;
+    data.pushs = pushs;
+    data.num = num;
+    
+    res.render('push', {
+      activeMenu: 'menu7', 
+      sidebar: sidebarOpen, 
+      data: data
+    });
+  } catch(error) {
+    console.log(error);
+  }
 });
 
 app.get('/announcement', async (req, res) => {
-  res.render('announcement', {activeMenu: 'menu8', sidebar: sidebarOpen});
+  let notices = [];
+  const snapshot = await db.collection('noticeCard').orderBy('regDate', 'desc').get();
+  snapshot.docs.forEach((doc) => {
+    notices.push(doc.data());
+  });
+  
+  res.render('announcement', {
+    activeMenu: 'menu8', 
+    sidebar: sidebarOpen, 
+    notices: notices
+  });
 });
 
-app.get('/report', async (req, res) => {
-  res.render('report', {activeMenu: 'menu9', sidebar: sidebarOpen});
+app.get('/report', async (req, res) => {  
+  db.collection('reportCard').get().then((querySnapshot) => {
+    const promises = [];
+    const reports = [];
+    
+    querySnapshot.forEach((doc) => {
+      const noticeData = doc.data();
+      const uid = noticeData.uid;
+      
+      const getUserPromise = db.collection('users').doc(uid).get().then((userDoc) => {
+        const userData = userDoc.data();
+        reports.push({
+          id: doc.id,
+          report: noticeData.report,
+          regDate: noticeData.regDate,
+          user: userData
+        });
+      });
+      
+      promises.push(getUserPromise);
+    });
+    
+    Promise.all(promises).then(() => {
+      res.render('report', {
+        activeMenu: 'menu9', 
+        sidebar: sidebarOpen,
+        reports: reports
+      });
+    });
+  })
+  
+  
 });
 
 app.get('/guide', async (req, res) => {
-  res.render('guide', {activeMenu: 'menu10', sidebar: sidebarOpen});
+  let guides = [];
+  const snapshot = await db.collection('guideCard').orderBy('writeDate', 'desc').get();
+  snapshot.docs.forEach((doc) => {
+    guides.push(doc.data());
+  });
+  res.render('guide', {
+    activeMenu: 'menu10', 
+    sidebar: sidebarOpen,
+    guides: guides
+  });
 });
 
 app.get('/user_profile', async (req, res) => {
@@ -709,6 +787,75 @@ app.get('/toggleSidebar', (req, res) => {
   res.redirect('back');
 });
 
+app.post('/addNotice', async (req, res) => {
+  const { title, content } = req.body;
+  
+  const regDate = new Date(); // 현재 날짜 및 시간을 가져옴
+  const timestamp = admin.firestore.Timestamp.fromDate(regDate);
+  
+  db.collection('noticeCard').add({
+    'type': 0,
+    'regDate': timestamp,
+    'title': title,
+    'content': content,
+    'confirm': false
+  }).then(async (docRef) => {
+    db.collection('noticeCard').doc(docRef.id).update({'docId': docRef.id});
+    res.redirect('/announcement');
+  }).catch((error) => {
+    console.error('error adding notice: ', error);
+    res.status(500).send('error');
+  })
+  
+});
+
+app.post('/addGuide', async (req, res) => {
+  const { title, content } = req.body;
+  
+  const regDate = new Date(); // 현재 날짜 및 시간을 가져옴
+  const timestamp = admin.firestore.Timestamp.fromDate(regDate);
+  
+  db.collection('guideCard').add({
+    'kind': 0,
+    'writeDate': timestamp,
+    'title': title,
+    'content': content,
+  }).then(async (docRef) => {
+    db.collection('guideCard').doc(docRef.id).update({'uid': docRef.id});
+    res.redirect('/guide');
+  }).catch((error) => {
+    console.error('error adding notice: ', error);
+    res.status(500).send('error');
+  })
+  
+});
+
+// 공지사항 삭제
+app.get('/deleteNotice/:id', (req, res) => {
+  const noticeId = req.params.id;
+  db.collection('noticeCard').doc(noticeId).delete()
+    .then(() => {
+      res.redirect('/announcement');
+    })
+    .catch((error) => {
+      console.error('Error deleting notice: ', error);
+      res.status(500).send('Something went wrong');
+    });
+});
+
+// 가이드 삭제
+app.get('/deleteGuide/:id', (req, res) => {
+  const noticeId = req.params.id;
+  db.collection('guideCard').doc(noticeId).delete()
+    .then(() => {
+      res.redirect('/guide');
+    })
+    .catch((error) => {
+      console.error('Error deleting notice: ', error);
+      res.status(500).send('Something went wrong');
+    });
+});
+
 // methods
 // total users size
 async function getTotalUsers() {
@@ -718,11 +865,7 @@ async function getTotalUsers() {
 
 function getTodayDate() {
   const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  
-  
-  
-  
+  today.setHours(0, 0, 0, 0);  
   return today;
 }
 
@@ -744,3 +887,76 @@ async function getUsersSignUpToday() {
   
   return users;
 }
+
+// utils
+app.post('/api/pushData', (req, res) => {
+  const {uids, tokens, text} = req.body;
+  // const tokens = uids.uids;
+  console.log(uids, tokens, text);
+  
+  let num = 0;
+  
+  tokens.forEach((token) => {
+    if(token) {
+      let message = {
+        notification: {
+            title: '썸푸닝 알림',
+            body: text
+        },
+        token: token,
+        android: {
+            priority: "high"
+        },
+        apns: {
+            payload: {
+                aps: {
+                    contentAvailable: true,
+                }
+            }
+        }
+      }
+      
+      console.log(uids[num]);
+  
+      admin.messaging().send(message).then(function (response) {
+          console.log('success : ', response);
+          
+          const regDate = new Date(); // 현재 날짜 및 시간을 가져옴
+          const timestamp = admin.firestore.Timestamp.fromDate(regDate);
+          
+          db.collection('pushCard').add({
+            'regDate': timestamp,
+            'uid': uids[num],
+            'content': text,
+            'confirm': false
+          }).then((docRef) => {
+            console.log('알림이 성공적으로 저장되었습니다. 문서 ID : ', docRef.id);
+            num ++;
+          })
+      }).catch(function(err) {
+          console.log('fail : ', err);
+      });
+    }
+    
+  });
+
+  res.json({"result" : "OK"});
+});
+
+app.post('/api/updateRegion', async (req, res) => {
+  const { uid, region } = req.body;
+  await db.collection('users').doc(uid).update({'region': pro_region.indexOf(region)});
+    res.json({'result': 'OK'});
+})
+
+app.post('/api/updateEducation', async (req, res) => {
+  const { uid, edu } = req.body;
+  await db.collection('users').doc(uid).update({'region': pro_education.indexOf(edu)});
+    res.json({'result': 'OK'});
+})
+
+app.post('/api/updateEducation', async (req, res) => {
+  const { uid, edu } = req.body;
+  await db.collection('users').doc(uid).update({'region': pro_education.indexOf(edu)});
+    res.json({'result': 'OK'});
+})
