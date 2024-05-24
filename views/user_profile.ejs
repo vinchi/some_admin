@@ -34,22 +34,26 @@
                     <div class="content-wrap">
                         <div class="item-wrap">
                             <div class="img-item">
-                                
+
                                 <% if(user.photoUrl[0]) { %>
                                     <img src="<%= user.photoUrl[0] %>" class="user-img">
-                                    
-                                <% } else { %>
-                                    <img src="./imges/avatar/Avatar=13.png" class="user-img">
-                                <% } %>
-                                <div class="fly-circle"></div>
+
+                                    <% } else { %>
+                                        <img src="./imges/avatar/Avatar=13.png" class="user-img">
+                                        <% } %>
+                                            <div class="fly-circle"></div>
                             </div>
-    
+
                             <div class="title-wrap">
-                                <div class="title"><%= user.username %></div>
-                                <div class="email"><%= user.email %></div>
+                                <div class="title">
+                                    <%= user.username %>
+                                </div>
+                                <div class="email">
+                                    <%= user.email %>
+                                </div>
                             </div>
                         </div>
-                        
+
                         <div class="item-wrap">
                             <div class="user-id-item">
                                 <div class="user-item">
@@ -77,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -111,41 +115,41 @@
                         <div class="user-item">
                             <div class="title">이메일</div>
                             <div class="user-content">
-                                <input type="text" placeholder="SOMEPOONING@gmail.com" value="<%= user.email %>"></input>
+                                <input type="text" placeholder="SOMEPOONING@gmail.com"
+                                    value="<%= user.email %>"></input>
                             </div>
                         </div>
 
                         <div class="user-item photo-item">
-                            <div class="title flex">
+                            <div class="title flex-column">
                                 <span>사진</span>
                                 <span>(최대5장등록)</span>
                             </div>
                             <div class="user-content">
 
                                 <div class="photo-wrap">
-                                    <% if(user.photoUrl.length > 0) { 
+                                    <% if(user.photoUrl.length> 0) {
                                         user.photoUrl.forEach(photo => { %>
-                                            <div class="user-photos">
-                                                <img src="<%= photo %>" width="30" height="200">
+                                        <div class="user-photos">
+                                            <img src="<%= photo %>" width="30" height="200">
+                                        </div>
+                                        <% }) } else { %>
+                                            <div class="user-photos" style="width:30;height:30">
+                                                <img src="./imges/avatar/Avatar=12.png">
                                             </div>
-                                    <% })
-                                    } else { %>
-                                        <div class="user-photos" style="width:30;height:30">
-                                            <img src="./imges/avatar/Avatar=12.png">
-                                        </div>
-                                        <div class="user-photos">
-                                            <img src="./imges/avatar/Avatar=15.png">
-                                        </div>
-                                        <div class="user-photos">
-                                            <img src="./imges/avatar/Avatar=17.png">
-                                        </div>
-                                        <div class="user-photos">
-                                            <img src="./imges/avatar/Avatar=14.png">
-                                        </div>
-                                        <div class="user-photos noimg">
-                                            <img src="./imges/icon/icon-noimg.png">
-                                        </div>
-                                    <% } %>
+                                            <div class="user-photos">
+                                                <img src="./imges/avatar/Avatar=15.png">
+                                            </div>
+                                            <div class="user-photos">
+                                                <img src="./imges/avatar/Avatar=17.png">
+                                            </div>
+                                            <div class="user-photos">
+                                                <img src="./imges/avatar/Avatar=14.png">
+                                            </div>
+                                            <div class="user-photos noimg">
+                                                <img src="./imges/icon/icon-noimg.png">
+                                            </div>
+                                            <% } %>
                                 </div>
 
 
@@ -178,11 +182,11 @@
                                 <div class="audio-wrap">
                                     <% if(user.voiceUrl) { %>
                                         <audio controls disableRemotePlayback src="<%= user.voiceUrl %>"></audio>
-                                    <% } else  { %>
-                                        <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
-                                    <% } %>
+                                        <% } else { %>
+                                            <audio controls disableRemotePlayback src="./imges/audio/bird3.mp3"></audio>
+                                            <% } %>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -194,9 +198,9 @@
                                     <video width="60%" height="300px" controls>
                                         <% if(user.videoUrl) { %>
                                             <source src="<%= user.videoUrl %>" type="video/mp4">
-                                        <% } else { %>
-                                            <source src="./imges/video/IMG_3165.MOV" type="video/mp4">
-                                        <% } %>
+                                            <% } else { %>
+                                                <source src="./imges/video/IMG_3165.MOV" type="video/mp4">
+                                                <% } %>
                                     </video>
                                 </div>
 
@@ -324,7 +328,7 @@
                         </div>
                         <div class="user-item">
                             <div class="title">명문대인증</div>
-                            <div class="user-content flex">
+                            <div class="user-content flex-row">
 
                                 <div class="select-menu" id="select-03-1">
                                     <div class="select-btn" id="select-btn-03-1">
@@ -344,7 +348,9 @@
                                     </ul>
                                 </div>
                                 <div class="file-download-wrap">
-                                    <a href="/public/imges/logo_some_200_46.png" download>다운로드</a>
+                                    <button class="download-btn null">
+                                        <a href="" download>다운로드 (파일 0개)</a>
+                                    </button>
                                 </div>
 
                             </div>
@@ -353,7 +359,7 @@
                         <div class="user-item">
                             <div class="title">전문직인증</div>
 
-                            <div class="user-content">
+                            <div class="user-content flex-row">
 
                                 <div class="select-menu" id="select-05">
                                     <div class="select-btn" id="select-btn-05">
@@ -373,12 +379,16 @@
                                         </li>
                                     </ul>
                                 </div>
-
+                                <div class="file-download-wrap">
+                                    <button class="download-btn null">
+                                        <a href="" download>다운로드 (파일 0개)</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="user-item">
                             <div class="title">대기업인증</div>
-                            <div class="user-content">
+                            <div class="user-content flex-row">
                                 <div class="select-menu" id="select-06">
                                     <div class="select-btn" id="select-btn-06">
                                         <span class="sBtn-text" id="sBtn-text-06">미심사</span>
@@ -397,13 +407,17 @@
                                         </li>
                                     </ul>
                                 </div>
-
+                                <div class="file-download-wrap">
+                                    <button class="download-btn null">
+                                        <a href="" download>다운로드 (파일 0개)</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="user-item">
                             <div class="title">사업가인증</div>
-                            <div class="user-content">
+                            <div class="user-content flex-row">
 
                                 <div class="select-menu" id="select-07">
                                     <div class="select-btn" id="select-btn-07">
@@ -430,13 +444,17 @@
 
                                     </ul>
                                 </div>
-
+                                <div class="file-download-wrap">
+                                    <button class="download-btn">
+                                        <a href="/public/imges/logo_some_200_46.png" download>다운로드 (파일 1개)</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="user-item">
                             <div class="title">소득인증</div>
-                            <div class="user-content">
+                            <div class="user-content flex-row">
                                 <div class="select-menu" id="select-08">
                                     <div class="select-btn" id="select-btn-08">
                                         <span class="sBtn-text" id="sBtn-text-08">미심사</span>
@@ -459,13 +477,17 @@
 
                                     </ul>
                                 </div>
-
+                                <div class="file-download-wrap">
+                                    <button class="download-btn null">
+                                        <a href="" download>다운로드 (파일 0개)</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         <div class="user-item">
                             <div class="title">자산인증</div>
-                            <div class="user-content">
+                            <div class="user-content flex-row">
                                 <div class="select-menu" id="select-09">
                                     <div class="select-btn" id="select-btn-09">
                                         <span class="sBtn-text" id="sBtn-text-09">미심사</span>
@@ -491,17 +513,21 @@
 
                                     </ul>
                                 </div>
-
+                                <div class="file-download-wrap">
+                                    <button class="download-btn null">
+                                        <a href="" download>다운로드 (파일 0개)</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
                         <!-- 첨부서류 -->
-                        <div class="attached-file-wrap">
-                            <div class="top-title">인증서류 첨부파일</div>
+                        <!-- <div class="attached-file-wrap">
+                            <div class="top-title">인증서류 첨부파일</div> -->
 
-                            <!--image popup-->
-                            <!-- Trigger the Modal -->
-                            <!-- <div class="att-file">
+                        <!--image popup-->
+                        <!-- Trigger the Modal -->
+                        <!-- <div class="att-file">
                                 <div class="images">
                                     <div class="att-title">명문대</div>
                                     <img src="./imges/acc/jolup-file.png" alt="명문대인증 첨부파일">
@@ -568,7 +594,7 @@
                                     </span>
                                     <span class="item-text">반려사유 1</span>
                                 </li>
-                                
+
                             </ul>
                         </div>
 
@@ -583,8 +609,9 @@
 
                 </div>
             </div>
+        </div>
 
-<script src="js/script.js"></script>
-<script src="js/modal.js"></script>
-<script src="js/dropdown_user_pro.js"></script>
-<%- include('partials/footer'); %>
+            <script src="js/script.js"></script>
+            <script src="js/modal.js"></script>
+            <script src="js/dropdown_user_pro.js"></script>
+            <%- include('partials/footer'); %>

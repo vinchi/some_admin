@@ -3390,8 +3390,9 @@ input[type="color"]::-moz-color-swatch {
     box-shadow: 2px 2px 4px rgb(0,0,0,0.1);
     height: 84vh;
     margin-bottom: 2px;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x:hidden;
+    padding-right:16px;
 }
 
 
@@ -3461,12 +3462,14 @@ input[type="color"]::-moz-color-swatch {
     align-items: center;
     justify-content: space-around;
     max-height: 800px;
+
 }
 .profile-list-left .user-item{
     display: flex;
     align-items: center;
     padding:8px;
     width:100%;
+
 
 }
 .profile-list-left .user-item .item{
@@ -3559,6 +3562,8 @@ input[type="color"]::-moz-color-swatch {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    overflow-y: scroll;
+    overflow-x:hidden;
 }
 .profile-list-right .user-item{
     display: flex;
@@ -3579,15 +3584,17 @@ input[type="color"]::-moz-color-swatch {
     font-size:  0.75rem;
     margin-top: 4px;
 }
-.profile-list-right .user-item .title.flex{
+.profile-list-right .user-item .title.flex-column{
     display: flex;
     flex-direction: column;
 } 
 .profile-list-right .user-item .user-content{
     width: 100%;
 }
-.profile-list-right .user-item .user-content.flex{
+.flex-row{
     display: flex;
+    align-items: center;
+    gap: 24px;
 }
 .profile-list-right .user-item .user-content .photo-wrap {
     display: flex;
@@ -3652,6 +3659,21 @@ input[type="color"]::-moz-color-swatch {
 
 }
 
+.file-download-wrap button.download-btn.null{
+    color: var(--dark-grey);
+    background-color: var(--grey);
+}
+.file-download-wrap button.download-btn{
+    font-size: .85rem;
+    color: var(--light);
+    border-radius: 3px;
+    background-color: var(--primary);
+    box-shadow: 2px 2px 6px rgb(0, 0, 0, .25);
+}
+.file-download-wrap button.download-btn:active{
+    box-shadow: inset 2px 2px 8px rgb(0, 0, 0, .25);
+}
+
 .profile-btn{
     display: flex;
     align-items: center;
@@ -3669,10 +3691,10 @@ input[type="color"]::-moz-color-swatch {
     min-width:200px;
     color: var(--light);
     border-radius: 36px;
-    box-shadow: 2px 2px 6px rgb(0, 0, 0, .2);
+    box-shadow: 2px 2px 8px rgb(0, 0, 0, .25);
 }
 button:active{
-    box-shadow: inset 2px 2px 6px rgb(0, 0, 0, .2);
+    box-shadow: inset 2px 2px 8px rgb(0, 0, 0, .25);
 }
 
 button.btn-ing{
@@ -3833,9 +3855,10 @@ button.btn-plus{
 
 .container-user-pro{
     position: relative;
-    /* max-width: 320px; */
     width: 100%;
-    margin: 24px 0px 80px 0px;
+    padding-top: 24px;
+    margin: 24px 0px 60px 0px;
+    border-top: 1px solid var(--grey);
 }
 .container-user-pro .title{
     font-weight: 600;

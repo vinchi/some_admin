@@ -151,10 +151,12 @@ window.onload = initializer();
         dropbtns.forEach(function(dropbtn) {
             dropbtn.addEventListener('click', function() {
                 console.log("드랍다운 클릭")
+                
             });
+            dropbtn.style.borderColor = 'rgb(94, 94, 94)';
         })
         v.classList.toggle('show');
-        dropbtn.style.borderColor = 'rgb(94, 94, 94)';
+
     }
 
     showMenu = (value) => {
