@@ -2619,7 +2619,6 @@ td{
 }
 .content main .announcement-management .announcement-list .wrap1{
     overflow-x: auto;
-    border: 1px solid red;
 }
 .announcement-list table th, td{
     white-space: nowrap;
