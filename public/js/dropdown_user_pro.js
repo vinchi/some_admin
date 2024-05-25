@@ -87,39 +87,6 @@ options03.forEach(option03 => {
     });
 });
 
-// drop down menu3-1 - 명문대인증
-const optionMenu03_1 = document.querySelector("#select-03-1"),
-    selectBtn03_1 = optionMenu03_1.querySelector("#select-btn-03-1"),
-    options03_1 = optionMenu03_1.querySelectorAll("#option-03-1"),
-    sBtn_text03_1 = optionMenu03_1.querySelector("#sBtn-text-03-1");
-
-selectBtn03_1.addEventListener("click", () => optionMenu03_1.classList.toggle("active"));
-
-options03_1.forEach(option03_1 => {
-    option03_1.addEventListener("click", () => {
-        let selectedOption03_1 = option03_1.querySelector("#option-text-03-1").innerText;
-        sBtn_text03_1.innerText = selectedOption03_1;
-        
-        const data = {
-            uid: $("#uid").val(),
-            job: selectedOption03_1,
-        }
-        
-        $.ajax({
-            type: "POST",
-            url: "/api/updateEducation",
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json"
-        }).done(function(resp) {
-            alert("지역변경이 완료되었습니다.");
-        }).fail(function (err) {
-            alert(JSON.stringify(err));
-        });
-
-        optionMenu03_1.classList.remove("active");
-    });
-});
 
 // drop down menu4 - 직업
 const optionMenu04 = document.querySelector("#select-04"),
@@ -133,8 +100,93 @@ options04.forEach(option04 => {
     option04.addEventListener("click", () => {
         let selectedOption04 = option04.querySelector("#option-text-04").innerText;
         sBtn_text04.innerText = selectedOption04;
+        
+        const data = {
+            uid: $("#uid").val(),
+            job: selectedOption04,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateJob",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
         optionMenu04.classList.remove("active");
+    });
+});
+
+// drop down menu10-1 - 고급차량인증
+const optionMenu10_1 = document.querySelector("#select-10-1"),
+    selectBtn10_1 = optionMenu10_1.querySelector("#select-btn-10-1"),
+    options10_1 = optionMenu10_1.querySelectorAll("#option-10-1"),
+    sBtn_text10_1 = optionMenu10_1.querySelector("#sBtn-text-10-1");
+
+selectBtn10_1.addEventListener("click", () => optionMenu10_1.classList.toggle("active"));
+
+options10_1.forEach(option10_1 => {
+    option10_1.addEventListener("click", () => {
+        let selectedOption10_1 = option10_1.querySelector("#option-text-10-1").innerText;
+        sBtn_text10_1.innerText = selectedOption10_1;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability1: selectedOption10_1,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility1",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("고급차량인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu10_1.classList.remove("active");
+    });
+});
+
+// drop down menu11-1 - 슈퍼카인증
+const optionMenu11_1 = document.querySelector("#select-11-1"),
+    selectBtn11_1 = optionMenu11_1.querySelector("#select-btn-11-1"),
+    options11_1 = optionMenu11_1.querySelectorAll("#option-11-1"),
+    sBtn_text11_1 = optionMenu11_1.querySelector("#sBtn-text-11-1");
+
+selectBtn11_1.addEventListener("click", () => optionMenu11_1.classList.toggle("active"));
+
+options11_1.forEach(option11_1 => {
+    option11_1.addEventListener("click", () => {
+        let selectedOption11_1 = option11_1.querySelector("#option-text-11-1").innerText;
+        sBtn_text11_1.innerText = selectedOption11_1;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability2: selectedOption11_1,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility2",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("슈퍼카인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu10_1.classList.remove("active");
     });
 });
 
@@ -150,75 +202,535 @@ options05.forEach(option05 => {
     option05.addEventListener("click", () => {
         let selectedOption05 = option05.querySelector("#option-text-05").innerText;
         sBtn_text05.innerText = selectedOption05;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability3: selectedOption05,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility3",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("전문직인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
         optionMenu05.classList.remove("active");
     });
 });
 
-// drop down menu6 - 대기업인증
-const optionMenu06 = document.querySelector("#select-06"),
-    selectBtn06 = optionMenu06.querySelector("#select-btn-06"),
-    options06 = optionMenu06.querySelectorAll("#option-06"),
-    sBtn_text06 = optionMenu06.querySelector("#sBtn-text-06");
+// drop down menu5 - 대기업인증
+const optionMenu12 = document.querySelector("#select-12"),
+    selectBtn12 = optionMenu12.querySelector("#select-btn-12"),
+    options12 = optionMenu12.querySelectorAll("#option-12"),
+    sBtn_text12 = optionMenu12.querySelector("#sBtn-text-12");
 
-selectBtn06.addEventListener("click", () => optionMenu06.classList.toggle("active"));
+selectBtn12.addEventListener("click", () => optionMenu12.classList.toggle("active"));
 
-options06.forEach(option06 => {
-    option06.addEventListener("click", () => {
-        let selectedOption06 = option06.querySelector("#option-text-06").innerText;
-        sBtn_text06.innerText = selectedOption06;
+options12.forEach(option12 => {
+    option12.addEventListener("click", () => {
+        let selectedOption12 = option12.querySelector("#option-text-12").innerText;
+        sBtn_text12.innerText = selectedOption12;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability4: selectedOption12,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility4",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
-        optionMenu06.classList.remove("active");
+        optionMenu12.classList.remove("active");
     });
 });
 
-// drop down menu7 - 사업가인증
-const optionMenu07 = document.querySelector("#select-07"),
-    selectBtn07 = optionMenu07.querySelector("#select-btn-07"),
-    options07 = optionMenu07.querySelectorAll("#option-07"),
-    sBtn_text07 = optionMenu07.querySelector("#sBtn-text-07");
+// drop down menu5 - 사업가인증(매출10억이상)
+const optionMenu13 = document.querySelector("#select-13"),
+    selectBtn13 = optionMenu13.querySelector("#select-btn-13"),
+    options13 = optionMenu13.querySelectorAll("#option-13"),
+    sBtn_text13 = optionMenu13.querySelector("#sBtn-text-13");
 
-selectBtn07.addEventListener("click", () => optionMenu07.classList.toggle("active"));
+selectBtn13.addEventListener("click", () => optionMenu13.classList.toggle("active"));
 
-options07.forEach(option07 => {
-    option07.addEventListener("click", () => {
-        let selectedOption07 = option07.querySelector("#option-text-07").innerText;
-        sBtn_text07.innerText = selectedOption07;
+options13.forEach(option13 => {
+    option13.addEventListener("click", () => {
+        let selectedOption13 = option13.querySelector("#option-text-13").innerText;
+        sBtn_text13.innerText = selectedOption13;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability5: selectedOption13,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility5",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
-        optionMenu07.classList.remove("active");
+        optionMenu13.classList.remove("active");
     });
 });
 
-// drop down menu8 - 고소득인증
-const optionMenu08 = document.querySelector("#select-08"),
-    selectBtn08 = optionMenu08.querySelector("#select-btn-08"),
-    options08 = optionMenu08.querySelectorAll("#option-08"),
-    sBtn_text08 = optionMenu08.querySelector("#sBtn-text-08");
+// drop down menu5 - 사업가인증(매출20억이상)
+const optionMenu14 = document.querySelector("#select-14"),
+    selectBtn14 = optionMenu14.querySelector("#select-btn-14"),
+    options14 = optionMenu14.querySelectorAll("#option-14"),
+    sBtn_text14 = optionMenu14.querySelector("#sBtn-text-14");
 
-selectBtn08.addEventListener("click", () => optionMenu08.classList.toggle("active"));
+selectBtn14.addEventListener("click", () => optionMenu14.classList.toggle("active"));
 
-options08.forEach(option08 => {
-    option08.addEventListener("click", () => {
-        let selectedOption08 = option08.querySelector("#option-text-08").innerText;
-        sBtn_text08.innerText = selectedOption08;
+options14.forEach(option14 => {
+    option14.addEventListener("click", () => {
+        let selectedOption14 = option14.querySelector("#option-text-14").innerText;
+        sBtn_text14.innerText = selectedOption14;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability6: selectedOption14,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility6",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
 
-        optionMenu08.classList.remove("active");
+        optionMenu14.classList.remove("active");
     });
 });
-// drop down menu9 - 고소득인증
-const optionMenu09 = document.querySelector("#select-09"),
-    selectBtn09 = optionMenu09.querySelector("#select-btn-09"),
-    options09 = optionMenu09.querySelectorAll("#option-09"),
-    sBtn_text09 = optionMenu09.querySelector("#sBtn-text-09");
 
-selectBtn09.addEventListener("click", () => optionMenu09.classList.toggle("active"));
+// drop down menu5 - 사업가인증(매출30억이상)
+const optionMenu15 = document.querySelector("#select-15"),
+    selectBtn15 = optionMenu15.querySelector("#select-btn-15"),
+    options15 = optionMenu15.querySelectorAll("#option-15"),
+    sBtn_text15 = optionMenu15.querySelector("#sBtn-text-15");
 
-options09.forEach(option09 => {
-    option09.addEventListener("click", () => {
-        let selectedOption09 = option09.querySelector("#option-text-09").innerText;
-        sBtn_text09.innerText = selectedOption09;
+selectBtn15.addEventListener("click", () => optionMenu15.classList.toggle("active"));
 
-        optionMenu09.classList.remove("active");
+options15.forEach(option15 => {
+    option15.addEventListener("click", () => {
+        let selectedOption15 = option15.querySelector("#option-text-15").innerText;
+        sBtn_text15.innerText = selectedOption15;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability7: selectedOption15,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility7",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu15.classList.remove("active");
+    });
+});
+
+// drop down menu3-1 - 명문대인증
+const optionMenu03_1 = document.querySelector("#select-03-1"),
+    selectBtn03_1 = optionMenu03_1.querySelector("#select-btn-03-1"),
+    options03_1 = optionMenu03_1.querySelectorAll("#option-03-1"),
+    sBtn_text03_1 = optionMenu03_1.querySelector("#sBtn-text-03-1");
+
+selectBtn03_1.addEventListener("click", () => optionMenu03_1.classList.toggle("active"));
+
+options03_1.forEach(option03_1 => {
+    option03_1.addEventListener("click", () => {
+        let selectedOption03_1 = option03_1.querySelector("#option-text-03-1").innerText;
+        sBtn_text03_1.innerText = selectedOption03_1;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability8: selectedOption03_1,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility8",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("학력이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu03_1.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 고액소득(7천만원이상)
+const optionMenu16 = document.querySelector("#select-16"),
+    selectBtn16 = optionMenu16.querySelector("#select-btn-16"),
+    options16 = optionMenu16.querySelectorAll("#option-16"),
+    sBtn_text16 = optionMenu16.querySelector("#sBtn-text-16");
+
+selectBtn16.addEventListener("click", () => optionMenu16.classList.toggle("active"));
+
+options16.forEach(option16 => {
+    option16.addEventListener("click", () => {
+        let selectedOption16 = option16.querySelector("#option-text-16").innerText;
+        sBtn_text16.innerText = selectedOption16;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability9: selectedOption16,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility9",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu16.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 억대소득(1억이상)
+const optionMenu17 = document.querySelector("#select-17"),
+    selectBtn17 = optionMenu17.querySelector("#select-btn-17"),
+    options17 = optionMenu17.querySelectorAll("#option-17"),
+    sBtn_text17 = optionMenu17.querySelector("#sBtn-text-17");
+
+selectBtn17.addEventListener("click", () => optionMenu17.classList.toggle("active"));
+
+options17.forEach(option17 => {
+    option17.addEventListener("click", () => {
+        let selectedOption17 = option17.querySelector("#option-text-17").innerText;
+        sBtn_text17.innerText = selectedOption17;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability10: selectedOption17,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility10",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu17.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 고액자산(5억이상)
+const optionMenu18 = document.querySelector("#select-18"),
+    selectBtn18 = optionMenu18.querySelector("#select-btn-18"),
+    options18 = optionMenu18.querySelectorAll("#option-18"),
+    sBtn_text18 = optionMenu18.querySelector("#sBtn-text-18");
+
+selectBtn18.addEventListener("click", () => optionMenu18.classList.toggle("active"));
+
+options18.forEach(option18 => {
+    option18.addEventListener("click", () => {
+        let selectedOption18 = option18.querySelector("#option-text-18").innerText;
+        sBtn_text18.innerText = selectedOption18;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability11: selectedOption18,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility11",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu18.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 고액자산(10억이상)
+const optionMenu19 = document.querySelector("#select-19"),
+    selectBtn19 = optionMenu19.querySelector("#select-btn-19"),
+    options19 = optionMenu19.querySelectorAll("#option-19"),
+    sBtn_text19 = optionMenu19.querySelector("#sBtn-text-19");
+
+selectBtn19.addEventListener("click", () => optionMenu19.classList.toggle("active"));
+
+options19.forEach(option19 => {
+    option19.addEventListener("click", () => {
+        let selectedOption19 = option19.querySelector("#option-text-19").innerText;
+        sBtn_text19.innerText = selectedOption19;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability12: selectedOption19,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility12",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu19.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 초고액자산(20억이상)
+const optionMenu20 = document.querySelector("#select-20"),
+    selectBtn20 = optionMenu20.querySelector("#select-btn-20"),
+    options20 = optionMenu20.querySelectorAll("#option-20"),
+    sBtn_text20 = optionMenu20.querySelector("#sBtn-text-20");
+
+selectBtn20.addEventListener("click", () => optionMenu20.classList.toggle("active"));
+
+options20.forEach(option20 => {
+    option20.addEventListener("click", () => {
+        let selectedOption20 = option20.querySelector("#option-text-20").innerText;
+        sBtn_text20.innerText = selectedOption20;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability13: selectedOption20,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility13",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu20.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 고가아파트(10억이상)
+const optionMenu21 = document.querySelector("#select-21"),
+    selectBtn21 = optionMenu21.querySelector("#select-btn-21"),
+    options21 = optionMenu21.querySelectorAll("#option-21"),
+    sBtn_text21 = optionMenu21.querySelector("#sBtn-text-21");
+
+selectBtn21.addEventListener("click", () => optionMenu21.classList.toggle("active"));
+
+options21.forEach(option21 => {
+    option21.addEventListener("click", () => {
+        let selectedOption21 = option21.querySelector("#option-text-21").innerText;
+        sBtn_text21.innerText = selectedOption21;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability14: selectedOption21,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility14",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu21.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 초고가아파트(20억이상)
+const optionMenu22 = document.querySelector("#select-22"),
+    selectBtn22 = optionMenu22.querySelector("#select-btn-22"),
+    options22 = optionMenu22.querySelectorAll("#option-22"),
+    sBtn_text22 = optionMenu22.querySelector("#sBtn-text-22");
+
+selectBtn22.addEventListener("click", () => optionMenu22.classList.toggle("active"));
+
+options22.forEach(option22 => {
+    option22.addEventListener("click", () => {
+        let selectedOption22 = option22.querySelector("#option-text-22").innerText;
+        sBtn_text22.innerText = selectedOption22;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability15: selectedOption22,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility15",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu22.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 집안자산(30억이상)
+const optionMenu23 = document.querySelector("#select-23"),
+    selectBtn23 = optionMenu23.querySelector("#select-btn-23"),
+    options23 = optionMenu23.querySelectorAll("#option-23"),
+    sBtn_text23 = optionMenu23.querySelector("#sBtn-text-23");
+
+selectBtn23.addEventListener("click", () => optionMenu23.classList.toggle("active"));
+
+options23.forEach(option23 => {
+    option23.addEventListener("click", () => {
+        let selectedOption23 = option23.querySelector("#option-text-23").innerText;
+        sBtn_text23.innerText = selectedOption23;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability16: selectedOption23,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility16",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu23.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 집안자산(50억이상)
+const optionMenu24 = document.querySelector("#select-24"),
+    selectBtn24 = optionMenu24.querySelector("#select-btn-24"),
+    options24 = optionMenu24.querySelectorAll("#option-24"),
+    sBtn_text24 = optionMenu24.querySelector("#sBtn-text-24");
+
+selectBtn24.addEventListener("click", () => optionMenu24.classList.toggle("active"));
+
+options24.forEach(option24 => {
+    option24.addEventListener("click", () => {
+        let selectedOption24 = option24.querySelector("#option-text-24").innerText;
+        sBtn_text24.innerText = selectedOption24;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability17: selectedOption24,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility17",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu24.classList.remove("active");
+    });
+});
+
+// drop down menu5 - 명문가
+const optionMenu25 = document.querySelector("#select-25"),
+    selectBtn25 = optionMenu25.querySelector("#select-btn-25"),
+    options25 = optionMenu25.querySelectorAll("#option-25"),
+    sBtn_text25 = optionMenu25.querySelector("#sBtn-text-25");
+
+selectBtn25.addEventListener("click", () => optionMenu25.classList.toggle("active"));
+
+options25.forEach(option25 => {
+    option25.addEventListener("click", () => {
+        let selectedOption25 = option25.querySelector("#option-text-25").innerText;
+        sBtn_text25.innerText = selectedOption25;
+        
+        const data = {
+            uid: $("#uid").val(),
+            ability18: selectedOption25,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateAbility18",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("대기업인증 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu25.classList.remove("active");
     });
 });
 

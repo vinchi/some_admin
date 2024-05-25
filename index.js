@@ -251,6 +251,7 @@ const pro_body = ["아주마름", "마름", "약간마름", "보통", "약간통
 const pro_smoke = ["피움", "안피움"];
 const pro_drinking = ["안함", "조금함", "보통함", "술고래"];
 const pro_religion = ["무교", "기독교", "불교", "원불교", "이슬람교"];
+const pro_ability = ["심사중", "반려", "인증완료"];
 
 
 const dbURI = 'mongodb+srv://vinchi:7614015b@cluster0.gdtvf.mongodb.net/?retryWrites=true&w=majority';
@@ -694,6 +695,7 @@ app.get('/push', async (req, res) => {
     data.num = num;
     
     res.render('push', {
+      locals: locals,
       activeMenu: 'menu7', 
       sidebar: sidebarOpen, 
       data: data
@@ -704,6 +706,11 @@ app.get('/push', async (req, res) => {
 });
 
 app.get('/announcement', async (req, res) => {
+  const locals = {
+    title: "공지사항 | 썸푸닝",
+    description: "공지사항 페이지 입니다."
+  };
+  
   let notices = [];
   const snapshot = await db.collection('noticeCard').orderBy('regDate', 'desc').get();
   snapshot.docs.forEach((doc) => {
@@ -711,6 +718,7 @@ app.get('/announcement', async (req, res) => {
   });
   
   res.render('announcement', {
+    locals: locals,  
     activeMenu: 'menu8', 
     sidebar: sidebarOpen, 
     notices: notices
@@ -718,6 +726,11 @@ app.get('/announcement', async (req, res) => {
 });
 
 app.get('/report', async (req, res) => {  
+  const locals = {
+    title: "신고관리 | 썸푸닝",
+    description: "신고관리 페이지 입니다."
+  };
+  
   db.collection('reportCard').get().then((querySnapshot) => {
     const promises = [];
     const reports = [];
@@ -741,6 +754,7 @@ app.get('/report', async (req, res) => {
     
     Promise.all(promises).then(() => {
       res.render('report', {
+        locals: locals,
         activeMenu: 'menu9', 
         sidebar: sidebarOpen,
         reports: reports
@@ -752,12 +766,18 @@ app.get('/report', async (req, res) => {
 });
 
 app.get('/guide', async (req, res) => {
+  const locals = {
+    title: "썸푸닝가이드 | 썸푸닝",
+    description: "썸푸닝가이드 페이지 입니다."
+  };
+  
   let guides = [];
   const snapshot = await db.collection('guideCard').orderBy('writeDate', 'desc').get();
   snapshot.docs.forEach((doc) => {
     guides.push(doc.data());
   });
   res.render('guide', {
+    locals: locals,
     activeMenu: 'menu10', 
     sidebar: sidebarOpen,
     guides: guides
@@ -768,11 +788,17 @@ app.get('/user_profile', async (req, res) => {
   const slug = req.query['slug'];
   const uid = req.query['uid'];
   
+  const locals = {
+    title: "유저계정 | 썸푸닝",
+    description: "유저계정 페이지 입니다."
+  };
+  
   const snapshot = await db.collection('users').doc(uid).get();
   const user = snapshot.data();
   
   
   res.render('user_profile', {
+    locals: locals,
     activeMenu: slug, 
     sidebar: sidebarOpen, 
     user: user, 
@@ -951,12 +977,138 @@ app.post('/api/updateRegion', async (req, res) => {
 
 app.post('/api/updateEducation', async (req, res) => {
   const { uid, edu } = req.body;
-  await db.collection('users').doc(uid).update({'region': pro_education.indexOf(edu)});
+  await db.collection('users').doc(uid).update({'education': pro_education.indexOf(edu)});
     res.json({'result': 'OK'});
 })
 
-app.post('/api/updateEducation', async (req, res) => {
-  const { uid, edu } = req.body;
-  await db.collection('users').doc(uid).update({'region': pro_education.indexOf(edu)});
+app.post('/api/updateJob', async (req, res) => {
+  const { uid, job } = req.body;
+  await db.collection('users').doc(uid).update({'job': pro_job.indexOf(job)});
+    res.json({'result': 'OK'});
+})
+
+//고급차량
+app.post('/api/updateAbility1', async (req, res) => {
+  const { uid, ability1 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_0': pro_ability.indexOf(ability1)});
+    res.json({'result': 'OK'});
+})
+
+//슈퍼카
+app.post('/api/updateAbility2', async (req, res) => {
+  const { uid, ability2 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_1': pro_ability.indexOf(ability2)});
+    res.json({'result': 'OK'});
+})
+
+//명문대
+app.post('/api/updateAbility3', async (req, res) => {
+  const { uid, ability3 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_2': pro_ability.indexOf(ability3)});
+    res.json({'result': 'OK'});
+})
+
+//전문직
+app.post('/api/updateAbility4', async (req, res) => {
+  const { uid, ability4 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_3': pro_ability.indexOf(ability4)});
+    res.json({'result': 'OK'});
+})
+
+//사업가(연매출 10억)
+app.post('/api/updateAbility5', async (req, res) => {
+  const { uid, ability5 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_4': pro_ability.indexOf(ability5)});
+    res.json({'result': 'OK'});
+})
+
+//사업가(연매출 20억)
+app.post('/api/updateAbility6', async (req, res) => {
+  const { uid, ability6 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_5': pro_ability.indexOf(ability6)});
+    res.json({'result': 'OK'});
+})
+
+//사업가(연매출 30억)
+app.post('/api/updateAbility7', async (req, res) => {
+  const { uid, ability7 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_6': pro_ability.indexOf(ability7)});
+    res.json({'result': 'OK'});
+})
+
+//명문대
+app.post('/api/updateAbility8', async (req, res) => {
+  const { uid, ability8 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_7': pro_ability.indexOf(ability8)});
+    res.json({'result': 'OK'});
+})
+
+//고액소득(7천만원이상)
+app.post('/api/updateAbility9', async (req, res) => {
+  const { uid, ability9 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_8': pro_ability.indexOf(ability9)});
+    res.json({'result': 'OK'});
+})
+
+//억대소득(1억이상)
+app.post('/api/updateAbility10', async (req, res) => {
+  const { uid, ability10 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_9': pro_ability.indexOf(ability10)});
+    res.json({'result': 'OK'});
+})
+
+//고액자산(5억이상)
+app.post('/api/updateAbility11', async (req, res) => {
+  const { uid, ability11 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_10': pro_ability.indexOf(ability11)});
+    res.json({'result': 'OK'});
+})
+
+//고액자산(10억이상)
+app.post('/api/updateAbility12', async (req, res) => {
+  const { uid, ability12 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_11': pro_ability.indexOf(ability12)});
+    res.json({'result': 'OK'});
+})
+
+//초고액자산(20억이상)
+app.post('/api/updateAbility13', async (req, res) => {
+  const { uid, ability13 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_12': pro_ability.indexOf(ability13)});
+    res.json({'result': 'OK'});
+})
+
+//고가아파트(10억이상)
+app.post('/api/updateAbility14', async (req, res) => {
+  const { uid, ability14 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_13': pro_ability.indexOf(ability14)});
+    res.json({'result': 'OK'});
+})
+
+//초고가아파트(20억이상)
+app.post('/api/updateAbility15', async (req, res) => {
+  const { uid, ability15 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_14': pro_ability.indexOf(ability15)});
+    res.json({'result': 'OK'});
+})
+
+//집안자산(30억이상)
+app.post('/api/updateAbility16', async (req, res) => {
+  const { uid, ability16 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_15': pro_ability.indexOf(ability16)});
+    res.json({'result': 'OK'});
+})
+
+//집안자산(50억이상)
+app.post('/api/updateAbility17', async (req, res) => {
+  const { uid, ability17 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_16': pro_ability.indexOf(ability17)});
+    res.json({'result': 'OK'});
+})
+
+//명문가
+app.post('/api/updateAbility18', async (req, res) => {
+  const { uid, ability18 } = req.body;
+  await db.collection('users').doc(uid).update({'ability_17': pro_ability.indexOf(ability18)});
     res.json({'result': 'OK'});
 })
