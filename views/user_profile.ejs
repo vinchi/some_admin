@@ -253,13 +253,103 @@
                             <div class="user-content">
                                 <div class="select-menu" id="select-04">
                                     <div class="select-btn" id="select-btn-04">
-                                        <span class="sBtn-text" id="sBtn-text-04">학생</span>
+                                        <span class="sBtn-text" id="sBtn-text-04"><%= job[user.job] %></span>
                                         <i class="bx bx-chevron-down"></i>
                                     </div>
                                     <ul class="options" id="job">
                                         <% num = 0; job.forEach(j => { %>
                                         <li class="option" id="option-04">
                                             <span class="option-text" id="option-text-04"><%= job[num] %></span>
+                                        </li>
+                                        <% num++; }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">키</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04-1">
+                                    <div class="select-btn" id="select-btn-04-1">
+                                        <span class="sBtn-text" id="sBtn-text-04-1"><%= user.height %></span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="job">
+                                        <% num = 0; height.forEach(j => { %>
+                                        <li class="option" id="option-04-1">
+                                            <span class="option-text" id="option-text-04-1"><%= height[num] %></span>
+                                        </li>
+                                        <% num++; }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">체형</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04-2">
+                                    <div class="select-btn" id="select-btn-04-2">
+                                        <span class="sBtn-text" id="sBtn-text-04-2"><%= body[user.body] %></span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="job">
+                                        <% num = 0; body.forEach(j => { %>
+                                        <li class="option" id="option-04-2">
+                                            <span class="option-text" id="option-text-04-2"><%= body[num] %></span>
+                                        </li>
+                                        <% num++; }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">MBTI</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04-3">
+                                    <div class="select-btn" id="select-btn-04-3">
+                                        <span class="sBtn-text" id="sBtn-text-04-3"><%= mbti[user.nbti] %></span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="job">
+                                        <% num = 0; mbti.forEach(j => { %>
+                                        <li class="option" id="option-04-3">
+                                            <span class="option-text" id="option-text-04-3"><%= mbti[num] %></span>
+                                        </li>
+                                        <% num++; }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">흡연여부</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04-4">
+                                    <div class="select-btn" id="select-btn-04-4">
+                                        <span class="sBtn-text" id="sBtn-text-04-4"><%= smoke[user.smoke] %></span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="job">
+                                        <% num = 0; smoke.forEach(j => { %>
+                                        <li class="option" id="option-04-4">
+                                            <span class="option-text" id="option-text-04-4"><%= smoke[num] %></span>
+                                        </li>
+                                        <% num++; }) %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="user-item">
+                            <div class="title">음주여부</div>
+                            <div class="user-content">
+                                <div class="select-menu" id="select-04-5">
+                                    <div class="select-btn" id="select-btn-04-5">
+                                        <span class="sBtn-text" id="sBtn-text-04-5"><%= drink[user.drinking] %></span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    <ul class="options" id="drink">
+                                        <% num = 0; drink.forEach(j => { %>
+                                        <li class="option" id="option-04-5">
+                                            <span class="option-text" id="option-text-04-5"><%= drink[num] %></span>
                                         </li>
                                         <% num++; }) %>
                                     </ul>

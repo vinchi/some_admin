@@ -159,7 +159,7 @@ const pro_regi = [
   "제주"
 ];
 
-const pro_nbti = [
+const pro_mbti = [
   "ISTJ(소금형)",
   "ISFJ(권력형)",
   "INFJ(예언자형)",
@@ -804,7 +804,19 @@ app.get('/user_profile', async (req, res) => {
     user: user, 
     region: pro_region, 
     education: pro_education, 
-    job: pro_job
+    job: pro_job,
+    height: pro_height,
+    body: pro_body,
+    mbti: pro_mbti,
+    smoke: pro_smoke,
+    drink: pro_drinking,
+    religion: pro_religion,
+    char: pro_char,
+    hobby: pro_hobby,
+    youDrink: pro_drinking,
+    youSmoke: pro_smoke,
+    youReligion: pro_religion,
+    youChar: pro_char
   });
 });
 
@@ -969,21 +981,59 @@ app.post('/api/pushData', (req, res) => {
   res.json({"result" : "OK"});
 });
 
+//지역
 app.post('/api/updateRegion', async (req, res) => {
   const { uid, region } = req.body;
   await db.collection('users').doc(uid).update({'region': pro_region.indexOf(region)});
     res.json({'result': 'OK'});
 })
 
+//학력
 app.post('/api/updateEducation', async (req, res) => {
   const { uid, edu } = req.body;
   await db.collection('users').doc(uid).update({'education': pro_education.indexOf(edu)});
     res.json({'result': 'OK'});
 })
 
+//직업
 app.post('/api/updateJob', async (req, res) => {
   const { uid, job } = req.body;
   await db.collection('users').doc(uid).update({'job': pro_job.indexOf(job)});
+    res.json({'result': 'OK'});
+})
+
+//키
+app.post('/api/updateHeight', async (req, res) => {
+  const { uid, height } = req.body;
+  await db.collection('users').doc(uid).update({'height': height});
+    res.json({'result': 'OK'});
+})
+
+//체형
+app.post('/api/updateBody', async (req, res) => {
+  const { uid, body } = req.body;
+  await db.collection('users').doc(uid).update({'body': pro_body.indexOf(body)});
+    res.json({'result': 'OK'});
+})
+
+//MBTI
+app.post('/api/updateMbti', async (req, res) => {
+  const { uid, mbti } = req.body;
+  await db.collection('users').doc(uid).update({'nbti': pro_mbti.indexOf(mbti)});
+    res.json({'result': 'OK'});
+})
+
+//흡연
+app.post('/api/updateSmoke', async (req, res) => {
+  const { uid, smoke } = req.body;
+  await db.collection('users').doc(uid).update({'smoke': pro_smoke.indexOf(smoke)});
+    res.json({'result': 'OK'});
+})
+
+//흡연
+app.post('/api/updateDrink', async (req, res) => {
+  const { uid, drink } = req.body;
+  await db.collection('users').doc(uid).update({'drinking': pro_drinking.indexOf(drink)});
     res.json({'result': 'OK'});
 })
 

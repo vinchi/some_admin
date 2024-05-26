@@ -122,6 +122,176 @@ options04.forEach(option04 => {
     });
 });
 
+// drop down menu4 - 키
+const optionMenu041 = document.querySelector("#select-04-1"),
+    selectBtn041 = optionMenu041.querySelector("#select-btn-04-1"),
+    options041 = optionMenu041.querySelectorAll("#option-04-1"),
+    sBtn_text041 = optionMenu041.querySelector("#sBtn-text-04-1");
+
+selectBtn041.addEventListener("click", () => optionMenu041.classList.toggle("active"));
+
+options041.forEach(option041 => {
+    option041.addEventListener("click", () => {
+        let selectedOption041 = option041.querySelector("#option-text-04-1").innerText;
+        sBtn_text041.innerText = selectedOption041;
+        
+        const data = {
+            uid: $("#uid").val(),
+            height: selectedOption041,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateHeight",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu041.classList.remove("active");
+    });
+});
+
+// drop down menu4 - 채형
+const optionMenu042 = document.querySelector("#select-04-2"),
+    selectBtn042 = optionMenu042.querySelector("#select-btn-04-2"),
+    options042 = optionMenu042.querySelectorAll("#option-04-2"),
+    sBtn_text042 = optionMenu042.querySelector("#sBtn-text-04-2");
+
+selectBtn042.addEventListener("click", () => optionMenu042.classList.toggle("active"));
+
+options042.forEach(option042 => {
+    option042.addEventListener("click", () => {
+        let selectedOption042 = option042.querySelector("#option-text-04-2").innerText;
+        sBtn_text042.innerText = selectedOption042;
+        
+        const data = {
+            uid: $("#uid").val(),
+            body: selectedOption042,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateBody",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu042.classList.remove("active");
+    });
+});
+
+// drop down menu4 - MBTI
+const optionMenu043 = document.querySelector("#select-04-3"),
+    selectBtn043 = optionMenu043.querySelector("#select-btn-04-3"),
+    options043 = optionMenu043.querySelectorAll("#option-04-3"),
+    sBtn_text043 = optionMenu043.querySelector("#sBtn-text-04-3");
+
+selectBtn043.addEventListener("click", () => optionMenu043.classList.toggle("active"));
+
+options043.forEach(option043 => {
+    option043.addEventListener("click", () => {
+        let selectedOption043 = option043.querySelector("#option-text-04-3").innerText;
+        sBtn_text043.innerText = selectedOption043;
+        
+        const data = {
+            uid: $("#uid").val(),
+            mbti: selectedOption043,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateMbti",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu043.classList.remove("active");
+    });
+});
+
+// drop down menu4 - 흡연여부
+const optionMenu044 = document.querySelector("#select-04-4"),
+    selectBtn044 = optionMenu044.querySelector("#select-btn-04-4"),
+    options044 = optionMenu044.querySelectorAll("#option-04-4"),
+    sBtn_text044 = optionMenu044.querySelector("#sBtn-text-04-4");
+
+selectBtn044.addEventListener("click", () => optionMenu044.classList.toggle("active"));
+
+options044.forEach(option044 => {
+    option044.addEventListener("click", () => {
+        let selectedOption044 = option044.querySelector("#option-text-04-4").innerText;
+        sBtn_text044.innerText = selectedOption044;
+        
+        const data = {
+            uid: $("#uid").val(),
+            smoke: selectedOption044,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateSmoke",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu044.classList.remove("active");
+    });
+});
+
+// drop down menu4 - 음주여부
+const optionMenu045 = document.querySelector("#select-04-5"),
+    selectBtn045 = optionMenu045.querySelector("#select-btn-04-5"),
+    options045 = optionMenu045.querySelectorAll("#option-04-5"),
+    sBtn_text045 = optionMenu045.querySelector("#sBtn-text-04-5");
+
+selectBtn045.addEventListener("click", () => optionMenu045.classList.toggle("active"));
+
+options045.forEach(option045 => {
+    option045.addEventListener("click", () => {
+        let selectedOption045 = option045.querySelector("#option-text-04-5").innerText;
+        sBtn_text045.innerText = selectedOption045;
+        
+        const data = {
+            uid: $("#uid").val(),
+            drink: selectedOption045,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateDrink",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("직업이 변경이 완료되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu045.classList.remove("active");
+    });
+});
+
 // drop down menu10-1 - 고급차량인증
 const optionMenu10_1 = document.querySelector("#select-10-1"),
     selectBtn10_1 = optionMenu10_1.querySelector("#select-btn-10-1"),
@@ -283,7 +453,7 @@ options13.forEach(option13 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("사업가인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -317,7 +487,7 @@ options14.forEach(option14 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("사업가인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -351,7 +521,7 @@ options15.forEach(option15 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("사업가인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -385,7 +555,7 @@ options03_1.forEach(option03_1 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("학력이 변경이 완료되었습니다.");
+            alert("명문대인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -419,7 +589,7 @@ options16.forEach(option16 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("고액소득인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -453,7 +623,7 @@ options17.forEach(option17 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("억대소득인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -487,7 +657,7 @@ options18.forEach(option18 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("고액자산인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -521,7 +691,7 @@ options19.forEach(option19 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("고액자산인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -555,7 +725,7 @@ options20.forEach(option20 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("초고액자산인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -589,7 +759,7 @@ options21.forEach(option21 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("고가아파트인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -623,7 +793,7 @@ options22.forEach(option22 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("초고가아파트인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -657,7 +827,7 @@ options23.forEach(option23 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("집안자산인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -691,7 +861,7 @@ options24.forEach(option24 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("집안자산인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
@@ -725,7 +895,7 @@ options25.forEach(option25 => {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).done(function(resp) {
-            alert("대기업인증 변경이 완료되었습니다.");
+            alert("명문가인증 변경이 완료되었습니다.");
         }).fail(function (err) {
             alert(JSON.stringify(err));
         });
