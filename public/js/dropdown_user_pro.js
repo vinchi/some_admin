@@ -292,6 +292,41 @@ options045.forEach(option045 => {
     });
 });
 
+// drop down menu4 - 음주여부
+const optionMenu26 = document.querySelector("#select-26"),
+    selectBtn26 = optionMenu26.querySelector("#select-btn-26"),
+    options26 = optionMenu26.querySelectorAll("#option-26"),
+    sBtn_text26 = optionMenu26.querySelector("#sBtn-text-26");
+
+selectBtn26.addEventListener("click", () => optionMenu26.classList.toggle("active"));
+
+options26.forEach(option26 => {
+    option26.addEventListener("click", () => {
+        let selectedOption26 = option26.querySelector("#option-text-26").innerText;
+        sBtn_text26.innerText = selectedOption26;
+        
+        const data = {
+            uid: $("#uid").val(),
+            token: $("#token").val(),
+            companion: selectedOption26,
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "/api/updateCompanion",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp) {
+            alert("반려 이유가 전송되었습니다.");
+        }).fail(function (err) {
+            alert(JSON.stringify(err));
+        });
+
+        optionMenu26.classList.remove("active");
+    });
+});
+
 // drop down menu10-1 - 고급차량인증
 const optionMenu10_1 = document.querySelector("#select-10-1"),
     selectBtn10_1 = optionMenu10_1.querySelector("#select-btn-10-1"),
@@ -904,4 +939,74 @@ options25.forEach(option25 => {
     });
 });
 
+//보류
+const btnIng = document.querySelector('.btn-ing');
+btnIng.addEventListener('click', () => {
+    console.log('보류버튼 누름');
+    
+    const data = {
+        token: $("#token").val(),
+        uid: $("#uid").val(),
+        reason: "썸푸닝 프로필 심사중 보류중으로 분류되었습니다.",
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "/api/updateIng",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function(resp) {
+        alert("프로필 심사 보류를 전송하였습니다.");
+    }).fail(function (err) {
+        alert(JSON.stringify(err));
+    });
+});
 
+//반려
+const btnReturn = document.querySelector('.btn-return');
+btnReturn.addEventListener('click', () => {
+    console.log('반려버튼 누름');
+    
+    const data = {
+        token: $("#token").val(),
+        uid: $("#uid").val(),
+        reason: "썸푸닝 프로필 심사중 반려중으로 분류되었습니다.",
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "/api/updateReturn",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function(resp) {
+        alert("프로필 심사 반려를 전송하였습니다.");
+    }).fail(function (err) {
+        alert(JSON.stringify(err));
+    });
+});
+
+//승인
+const btnOk = document.querySelector('.btn-ok');
+btnOk.addEventListener('click', () => {
+    console.log('승인버튼 누름');
+    
+    const data = {
+        token: $("#token").val(),
+        uid: $("#uid").val(),
+        reason: "썸푸닝 프로필 심사 승인 되었습니다.",
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "/api/updateOk",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function(resp) {
+        alert("프로필 심사 승인을 전송하였습니다.");
+    }).fail(function (err) {
+        alert(JSON.stringify(err));
+    });
+});

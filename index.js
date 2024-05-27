@@ -811,7 +811,7 @@ app.get('/user_profile', async (req, res) => {
     smoke: pro_smoke,
     drink: pro_drinking,
     religion: pro_religion,
-    char: pro_char,
+    chars: pro_char,
     hobby: pro_hobby,
     youDrink: pro_drinking,
     youSmoke: pro_smoke,
@@ -1160,5 +1160,119 @@ app.post('/api/updateAbility17', async (req, res) => {
 app.post('/api/updateAbility18', async (req, res) => {
   const { uid, ability18 } = req.body;
   await db.collection('users').doc(uid).update({'ability_17': pro_ability.indexOf(ability18)});
-    res.json({'result': 'OK'});
+  res.json({'result': 'OK'});
 })
+
+//보류 발송
+app.post('/api/updateCompanion', async (req, res) => {
+  const { uid, token, companion } = req.body;
+  
+  console.log(uid, token, companion);
+  
+  await db.collection('users').doc(uid).update({ 'judge': 1 });
+  
+  if(token) {
+    let message = {
+      notification: {
+          title: '썸푸닝 프로필 심사',
+          body: companion
+      },
+      token: token,
+      android: {
+          priority: "high"
+      },
+      apns: {
+          payload: {
+              aps: {
+                  contentAvailable: true,
+              }
+          }
+      }
+    }
+    
+    console.log(uid);
+
+    admin.messaging().send(message).then(function (response) {
+        console.log('success : ', response);
+    }).catch(function(err) {
+        console.log('fail : ', err);
+    });
+  }
+  res.json({"result" : "OK"});
+});
+
+//반려사유 발송
+app.post('/api/updateReturn', async (req, res) => {
+  const { uid, token, reason} = req.body;
+  
+  console.log(uid, token, reason);
+  
+  await db.collection('users').doc(uid).update({ 'judge': 2 });
+  
+  if(token) {
+    let message = {
+      notification: {
+          title: '썸푸닝 프로필 심사',
+          body: reason
+      },
+      token: token,
+      android: {
+          priority: "high"
+      },
+      apns: {
+          payload: {
+              aps: {
+                  contentAvailable: true,
+              }
+          }
+      }
+    }
+    
+    console.log(uid);
+
+    admin.messaging().send(message).then(function (response) {
+        console.log('success : ', response);
+    }).catch(function(err) {
+        console.log('fail : ', err);
+    });
+  }
+  res.json({"result" : "OK"});
+});
+
+//승인 발송
+app.post('/api/updateOk', async (req, res) => {
+  const { uid, token, reason} = req.body;
+  
+  console.log(uid, token, reason);
+  
+  await db.collection('users').doc(uid).update({ 'judge': 3 });
+  
+  if(token) {
+    let message = {
+      notification: {
+          title: '썸푸닝 프로필 심사',
+          body: reason
+      },
+      token: token,
+      android: {
+          priority: "high"
+      },
+      apns: {
+          payload: {
+              aps: {
+                  contentAvailable: true,
+              }
+          }
+      }
+    }
+    
+    console.log(uid);
+
+    admin.messaging().send(message).then(function (response) {
+        console.log('success : ', response);
+    }).catch(function(err) {
+        console.log('fail : ', err);
+    });
+  }
+  res.json({"result" : "OK"});
+});
