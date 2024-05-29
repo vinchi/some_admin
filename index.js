@@ -1169,7 +1169,7 @@ app.post('/api/updateCompanion', async (req, res) => {
   
   console.log(uid, token, companion);
   
-  await db.collection('users').doc(uid).update({ 'judge': 1 });
+  await db.collection('users').doc(uid).update({ 'judge': 2 });
   
   if(token) {
     let message = {
