@@ -354,6 +354,29 @@ app.get('/sp_users', async (req, res) => {
   });
 });
 
+app.get('/ability', async (req, res) => {
+  const locals = {
+    title: "서류관리 | 썸푸닝",
+    description: "썸푸닝 서류관리 입니다."
+  };
+  
+  const snapshot = await db.collection('ability').orderBy('regDate', 'desc').get();
+  var abilitys = [];
+  for(const ability of snapshot.docs) {
+    const aId = ability.id;
+    const abi = ability.data();
+    
+    abilitys.push(abi);
+  }
+  
+  res.render('ability', {
+    locals: locals,
+    activeMenu: 'menu11', 
+    sidebar: sidebarOpen,
+    abilitys: abilitys
+  });
+});
+
 app.get('/chatting', async (req, res) => {
   const uid = req.query.uid || 0;
   let num = req.query.num || 0;
